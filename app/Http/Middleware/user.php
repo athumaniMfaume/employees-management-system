@@ -16,11 +16,10 @@ class user
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()){
+    if (Auth::guard('web')->check()) { // Check if logged in as User
+        return $next($request);
+    }
 
-            return $next($request);
-         }else{
-             return redirect()->route('login')->with('error','Unuthorized User,Login To Continue!!');
-         }
+    return redirect()->route('login')->with('error', 'Unauthorized User, Login to Continue!!');
     }
 }

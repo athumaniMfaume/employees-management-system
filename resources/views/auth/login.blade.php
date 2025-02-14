@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title> Employee | Admin Login </title>
+    <title> Employee | Login </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -61,13 +61,13 @@
                                                     </div>
                                                     <div class="carousel-inner text-center text-white-50 pb-5">
                                                         <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" This system makes employee management seamless and efficient. A game-changer for our HR team! "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
+                                                            <p class="fs-15 fst-italic">" User-friendly interface and excellent features for tracking employee records. Highly recommended! "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Managing employees, leave requests, and payroll has never been easier. A must-have for any company! "</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,19 +146,7 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center">
-                            <p class="mb-0">&copy;
-                                <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+         @include('includes.footer')
         <!-- end Footer -->
     </div>
     <!-- end auth-page-wrapper -->

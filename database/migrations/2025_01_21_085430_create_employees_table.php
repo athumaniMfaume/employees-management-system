@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->string('phone');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->date('dob');
-            $table->decimal('salary', 8, 2);
+            $table->decimal('salary', 12, 2);
             $table->timestamps();
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
         });

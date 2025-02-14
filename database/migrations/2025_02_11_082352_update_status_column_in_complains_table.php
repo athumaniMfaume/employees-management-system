@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('employees', function (Blueprint $table) {
-            $table->string('password')->after('email'); // Add the password column after the email column
+        Schema::table('complains', function (Blueprint $table) {
+            $table->string('status')->default('pending')->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('employees', function (Blueprint $table) {
-            $table->dropColumn('password'); // Remove the password column on rollback
+        Schema::table('complains', function (Blueprint $table) {
+            $table->enum('status', ['pending','approved','rejected'])->default('pending')->change();
         });
     }
 };

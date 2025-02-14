@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('employees', function (Blueprint $table) {
-            $table->decimal('salary', 12, 2)->change(); // Increase precision
+        Schema::table('leaves', function (Blueprint $table) {
+            $table->string('status')->default('pending')->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('employees', function (Blueprint $table) {
-            $table->decimal('salary', 8, 2)->change(); // Revert to original
+        Schema::table('leaves', function (Blueprint $table) {
+            $table->enum('status', ['pending','approved','rejected'])->default('pending')->change();
         });
     }
 };

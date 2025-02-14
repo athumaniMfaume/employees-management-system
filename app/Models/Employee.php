@@ -3,22 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable; // Use this instead of Model
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Employee extends Model
+class Employee extends Authenticatable
 {
     use HasFactory;
 
 
     protected $fillable = [
-        'name',
-        'department_id',
-        'position',
-        'email',
-        'phone',
-        'dob',
-        'salary',
+        'name', 'email', 'password', 'position', 'phone', 'dob', 'salary', 'department_id'
+    ];
 
+        protected $hidden = [
+        'password', 'remember_token',
     ];
 
     public function departments(){

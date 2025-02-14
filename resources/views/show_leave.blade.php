@@ -6,12 +6,8 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Employees | View Employees</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+    <title>Admin | Show Leave </title>
+     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
     <!-- Sweet Alert css-->
     <link href="{{asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
@@ -26,6 +22,7 @@
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{asset('assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+
 
 
 </head>
@@ -89,12 +86,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">View Employee</h4>
+                                <h4 class="mb-sm-0">Show Leaves</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="{{route('employees.index')}}">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">View Employee</li>
+                                        <li class="breadcrumb-item active">Show Leaves</li>
                                     </ol>
                                 </div>
 
@@ -107,7 +104,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Add, Edit & Remove Employee</h4>
+                                    <h4 class="card-title mb-0">Add, Edit & Remove Leaves</h4>
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
@@ -118,7 +115,7 @@
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
                                                 <div>
-                                                    <a href="{{route('employees.create')}}" class="btn btn-primary">Add Employee</a>
+                                                    <a href="" class="btn btn-primary">Show Leaves</a>
                                                 </div>
                                             </div>
                                             <div class="col-sm">
@@ -135,15 +132,13 @@
                                             <table class="table align-middle table-nowrap" id="customerTable">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th> S/N </th>
-                                                        <th class="sort" data-sort="customer_name">Name</th>
-                                                        <th class="sort" data-sort="email">Department</th>
-                                                        <th class="sort" data-sort="email">Position</th>
-                                                        <th class="sort" data-sort="phone">Email</th>
-                                                        <th class="sort" data-sort="date">Birthday</th>
-                                                        <th class="sort" data-sort="date">Join Date</th>
-                                                        <th class="sort" data-sort="date">Phone</th>
-                                                        <th class="sort" data-sort="status">Salary</th>
+                                                        <th class="sort" data-sort="customer_name" > S/N </th>
+                                                        <th class="sort" data-sort="customer_name">Type</th>
+                                                        <th class="sort" data-sort="customer_name">Reason</th>
+                                                        <th class="sort" data-sort="customer_name">Start Date</th>
+                                                        <th class="sort" data-sort="customer_name">End Date</th>
+                                                        <th class="sort" data-sort="customer_name">Status</th>
+                                                        
                                                         <th class="sort" data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
@@ -153,17 +148,30 @@
                                         
                                                     <tr>
                                                         <th>{{$data->id}}</th>
-                                                        <td class="customer_name" >{{$data->name}}</td>
-                                                        <td class="customer_name">{{$data->departments->name}}</td>
-                                                        <td class="customer_name">{{$data->position}}</td>
-                                                        <td class="email">{{$data->email}}</td>
-                                                        <td class="phone">{{$data->dob}}</td>
-                                                        <td class="date">{{$data->created_at}}</td>
-                                                        <td class="date">{{$data->phone}}</td>
-                                                        <td class="date">{{$data->salary}}</td>
+                                                        <td class="customer_name" >{{$data->type}}</td>
+                                                        <td class="customer_name" >{{$data->reason}}</td>
+                                                        <td class="customer_name" >{{$data->start_date}}</td>
+                                                        <td class="customer_name" >{{$data->end_date}}</td>
+                                                         <td >  @if($data->status == 'pending')
+
+                                                           
+                                                            <button type="button" class="btn btn-primary btn-label waves-effect waves-light"><i class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> {{ucfirst($data->status)}}</</button>
+
+                                                            @elseif($data->status == 'rejected')
+
+                                                            <button type="button" class="btn btn-danger btn-label waves-effect waves-light"><i class="ri-error-warning-line label-icon align-middle fs-16 me-2"></i> {{ucfirst($data->status)}}</button>
+
+                                                            @elseif($data->status == 'resolved')
+
+                                                            <button type="button" class="btn btn-success btn-label waves-effect waves-light"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> {{ucfirst($data->status)}}</button>
+
+                                                            @endif</td>
+                                                        
+                                                     
+                                                        
                                                         <td>
-                                                           <a href="{{ route('employees.edit', $data->id) }}" class="btn btn-warning btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>Edit</a>
-                                                           <form action="{{ route('employees.destroy', $data->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this emloyee?');">
+                                                           <a href="{{ route('leave.approve', $data->id) }}" class="btn btn-warning btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>Edit</a>
+                                                           <form action="{{ route('leaves.destroy', $data->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this emloyee?');">
                                                             @csrf
                                                             @method('DELETE')
                                                             
@@ -179,7 +187,7 @@
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px">
                                                     </lord-icon>
                                                     <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                   
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -990,10 +998,6 @@
                 </div>
             </div>
         </div>
-
-                <!-- footer -->
-         @include('includes.footer')
-        <!-- end Footer -->
     </div>
 
     <!-- JAVASCRIPT -->
@@ -1016,7 +1020,6 @@
 
     <!-- App js -->
     <script src="{{asset('assets/js/app.js')}}"></script>
-</body>
 
 
 <!-- Mirrored from themesbrand.com/velzon/html/material/tables-listjs.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:05:08 GMT -->

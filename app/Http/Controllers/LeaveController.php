@@ -16,6 +16,19 @@ class LeaveController extends Controller
         return view('employees.index');
     }
 
+    public function view()
+    {
+        $datas = Leave::all();
+        return view('employees.leaves.view_leaves',compact('datas'));
+    }
+
+     public function single_employee_leave_view()
+    {
+        $emp_id = Auth::guard('employee')->user()->id;
+        $datas = Leave::where('employee_id',$emp_id)->get();
+        return view('employees.leaves.view_leaves',compact('datas'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -36,15 +49,21 @@ class LeaveController extends Controller
         'end_date' => 'required|date|after_or_equal:start_date',
     ]);
 
-    Leave::create([
-        'employee_id' => Auth::employee()->id,
-        'type' => $request->type,
-        'reason' => $request->reason,
-        'start_date' => $request->start_date,
-        'end_date' => $request->end_date,
-    ]);
+               $data = new Leave();
+            $data->type = $request->type;
+            $data->reason = $request->reason;
+            $data->start_date = $request->start_date;
+            $data->end_date = $request->end_date;
+             // Get the authenticated employee's ID and set it to the 'employee_id' field
+             $data->employee_id = Auth::guard('employee')->user()->id;
 
-    return redirect()->back()->with('success', 'Leave request submitted successfully.');
+    if ($data->save()) {
+            return redirect()->route('single.employee.leaves.view')->with('success','Leave Added Successfully!');
+        }
+
+        else {
+            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        }
 }
 
 
@@ -59,24 +78,52 @@ class LeaveController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Leave $leave)
+    public function edit( $leave)
     {
-        //
+        $datas = Leave::findOrFail($leave);
+        return view('employees.leaves.edit_leaves',compact('datas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Leave $leave)
+    public function update(Request $request,$leave)
     {
-        //
+        $request->validate([
+            'type' => 'sometimes',
+            'reason' => 'sometimes',
+            'start_date' => 'sometimes',
+            'end_date' => 'sometimes',
+        ]);
+
+         $data = Leave::findOrFail($leave);
+
+        $data->type = $request->type;
+        $data->reason = $request->reason;
+        $data->start_date = $request->start_date;
+        $data->end_date = $request->end_date;
+        
+
+        if ($data->update()) {
+            return redirect()->route('single.employee.leaves.view')->with('success','Leave Updated Successfully!');
+        }
+
+        else {
+            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Leave $leave)
+    public function destroy( $leave)
     {
-        //
+         $datas = Leave::findOrFail($leave);
+        if ($datas->delete()) {
+            return redirect()->back()->with('success','Leave Delete Successfully!');
+        }
+        else {
+            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        }
     }
 }

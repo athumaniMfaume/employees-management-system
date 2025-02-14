@@ -15,42 +15,55 @@ class AuthController extends Controller
     {
         return view('auth.change_password');
     }
+public function change_password_post(Request $request)
+{
+    // Validate the new password
+    $validator = Validator::make($request->all(), [
+        'current_password' => 'required',
+        'new_password' => 'required|confirmed',
+        'new_password_confirmation' => 'required',
+    ]);
 
-    public function change_password_post(Request $request)
-    {
-        // Validate the new password
-        $validator = Validator::make($request->all(), [
-            'current_password' => 'required',
-            'new_password' => 'required|confirmed', 
-            'new_password_confirmation' => 'required',
-            // Ensure that the new_password_confirmation field is included in the form
-        ]);
-    
-        if ($validator->fails()) {
-            return redirect()->route('change_password')
-                ->withErrors($validator)
-                ->withInput();
-        }
-    
-        // Check if the current password matches
-        if (!Hash::check($request->current_password, Auth::user()->password)) {
-            return redirect()->route('change_password')
-                ->with('error', 'The current password is incorrect.');
-        }
-    
-        // Ensure the user is authenticated
-        if (Auth::check()) {
-            // Update the password
-            Auth::user()->update([
-                'password' => Hash::make($request->new_password),
-            ]);
-    
-            return redirect()->route('change_password')
-                ->with('success', 'Password changed successfully.');
-        } else {
-            return redirect()->route('login')->with('error', 'You need to be logged in to change your password.');
-        }
+    if ($validator->fails()) {
+        return redirect()->route('change_password')
+            ->withErrors($validator)
+            ->withInput();
     }
+
+    // Determine which guard the user is logged into (employee or user)
+    if (Auth::guard('employee')->check()) {
+        // Employee is logged in
+        $authUser = Auth::guard('employee')->user();
+    } elseif (Auth::guard('web')->check()) {
+        // User (admin) is logged in
+        $authUser = Auth::guard('web')->user();
+    } else {
+        // If neither is authenticated
+        return redirect()->route('login')->with('error', 'You need to be logged in to change your password.');
+    }
+
+    // Check if the current password matches the stored password for the correct user
+    if (!Hash::check($request->current_password, $authUser->password)) {
+        return redirect()->route('change_password')
+            ->with('error', 'The current password is incorrect.');
+    }
+
+    // Update the password
+    $authUser->update([
+        'password' => Hash::make($request->new_password),
+    ]);
+
+    // Log the user out after password change, to prevent session conflicts
+    Auth::guard($authUser instanceof \App\Models\User ? 'web' : 'employee')->logout();
+
+    // Redirect user to the login page with success message
+    return redirect()->route('login')
+        ->with('success', 'Password changed successfully. Please log in again.');
+}
+
+
+
+
 
     public function logout()
     {
@@ -97,43 +110,31 @@ class AuthController extends Controller
     }
 
     public function loginPost(Request $request)
-    {
-        // Validate the login request
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-    
-        // Retrieve the credentials
-        $credentials = $request->only('email', 'password');
-    
-        // Attempt authentication
-        if (Auth::attempt($credentials)) {
-            // Retrieve the authenticated user's role
+     {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-                if (Auth::user()) {
-                    return redirect()->route('employees.index')->with('success', 'Login Successfully');
-                }
+    $credentials = $request->only('email', 'password');
 
-                elseif (Auth::employee()) {
-                    return redirect()->route('leaves.index')->with('success', 'Login Successfully');
-                }
-           
-                
-            
-        }
-    
-        // Authentication failed
-        return redirect()->back()->with('error', 'Email or password is incorrect.');
+    // Attempt login as Admin (User)
+    if (Auth::guard('web')->attempt($credentials)) {
+        return redirect()->route('employees.index')->with('success', 'Login Successfully');
     }
+
+    // Attempt login as Employee
+    if (Auth::guard('employee')->attempt($credentials)) {
+        return redirect()->route('employees.dashboard')->with('success', 'Login Successfully');
+    }
+
+    return redirect()->back()->with('error', 'Email or password is incorrect.');
+}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
