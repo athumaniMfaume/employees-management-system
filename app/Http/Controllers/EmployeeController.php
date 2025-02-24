@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Leave;
@@ -38,6 +39,15 @@ class EmployeeController extends Controller
     }
 
 
+    public function single_view_employees($employee)
+    {
+ 
+        $emp = Employee::with('departments')->where('id',$employee)->get();
+        return view('single_view_employee',compact('emp'));
+    }
+
+
+
     public function employees_profile()
     {
         $emp_id = Auth::guard('employee')->user()->id;
@@ -46,6 +56,41 @@ class EmployeeController extends Controller
         $emp = Employee::with('departments')->where('id',$emp_id)->get();
         $deps = Department::all()->count();
         return view('employees.employees_profile',compact('deps','emp','leave','complain'));
+    }
+
+    public function admin_profile()
+    {
+        $emp_id = Auth::user()->id;
+        $user = User::where('id',$emp_id)->get();
+        return view('profile',compact('user'));
+    }
+
+    public function admin_profile_edit( $user)
+    {
+        $datas = User::findOrFail($user);
+     
+        return view('admin_profile_edit',compact('datas'));
+    }
+
+    public function admin_profile_update(Request $request, $user)
+    {
+        $request->validate([
+            'name' => 'sometimes',
+            'email' => 'sometimes|email',
+        ]);
+
+        $data = User::findOrFail($user);
+
+        $data->name = $request->name;
+        $data->email = $request->email;
+
+        if ($data->update()) {
+            return redirect()->route('admin.profile')->with('success','Admin Info Updated Successfully!');
+        }
+
+        else {
+            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        }
     }
 
     public function employees_profile_edit( $employee)
@@ -62,12 +107,22 @@ class EmployeeController extends Controller
             'department_id' => 'sometimes',
             'position' => 'sometimes',
             'email' => 'sometimes|email',
+            'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
             'phone' => 'sometimes',
             'dob' => 'sometimes',
             'salary' => 'sometimes',
         ]);
 
+      
+
         $data = Employee::findOrFail($employee);
+
+          $image = $request->image;
+    if ($image) {
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->image->move(public_path('/images'), $imagename);
+            $data->image = $imagename;
+        }
 
         $data->name = $request->name;
         $data->department_id = $request->department_id;
@@ -188,6 +243,7 @@ class EmployeeController extends Controller
         'position' => 'required',
         'email' => 'required|email|unique:employees,email',
         'phone' => 'required',
+        'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
         'dob' => 'required',
         'salary' => 'required',
     ]);
@@ -198,6 +254,13 @@ class EmployeeController extends Controller
     // Create a new employee
     $data = new Employee();
 
+    $image = $request->image;
+    if ($image) {
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->image->move(public_path('/images'), $imagename);
+            $data->image = $imagename;
+        }
+
     $data->name = $request->name;
     $data->department_id = $request->department_id;
     $data->position = $request->position;
@@ -207,9 +270,10 @@ class EmployeeController extends Controller
     $data->dob = $request->dob;
     $data->salary = $request->salary;
 
+
     if ($data->save()) {
         // Send the email to the employee
-        // Mail::to($data->email)->send(new EmployeeCredentialsNotification($data->email, $password));
+         Mail::to($data->email)->send(new EmployeeCredentialsNotification($data->email, $password));
 
         return redirect()->route('employees.show')->with('success', 'Employee Added Successfully!');
     } else {
@@ -247,11 +311,19 @@ class EmployeeController extends Controller
             'position' => 'sometimes',
             'email' => 'sometimes|email',
             'phone' => 'sometimes',
+            'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
             'dob' => 'sometimes',
             'salary' => 'sometimes',
         ]);
 
         $data = Employee::findOrFail($employee);
+        $image = $request->image;
+        
+        if ($image) {
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->image->move(public_path('/images'), $imagename);
+            $data->image = $imagename;
+        }
 
         $data->name = $request->name;
         $data->department_id = $request->department_id;
@@ -260,6 +332,8 @@ class EmployeeController extends Controller
         $data->phone = $request->phone;
         $data->dob = $request->dob;
         $data->salary = $request->salary;
+       
+
 
         if ($data->update()) {
             return redirect()->route('employees.show')->with('success','Employee Updated Successfully!');

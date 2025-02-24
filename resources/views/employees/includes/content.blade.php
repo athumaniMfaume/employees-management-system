@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="avatar-sm flex-shrink-0">
                                             <span class="avatar-title bg-warning rounded fs-3">
-                                                <i class="bx bx-user-circle"></i>
+                                                <i class="bx bx-news"></i>
                                             </span>
                                         </div>
                                     </div>

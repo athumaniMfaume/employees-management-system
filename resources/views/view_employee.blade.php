@@ -136,6 +136,7 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th> S/N </th>
+                                                        <th class="sort" data-sort="customer_name">Image</th>
                                                         <th class="sort" data-sort="customer_name">Name</th>
                                                         <th class="sort" data-sort="email">Department</th>
                                                         <th class="sort" data-sort="email">Position</th>
@@ -153,6 +154,7 @@
                                         
                                                     <tr>
                                                         <th>{{$data->id}}</th>
+                                                        <td><img height="70" width="120" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
                                                         <td class="customer_name" >{{$data->name}}</td>
                                                         <td class="customer_name">{{$data->departments->name}}</td>
                                                         <td class="customer_name">{{$data->position}}</td>
@@ -162,6 +164,7 @@
                                                         <td class="date">{{$data->phone}}</td>
                                                         <td class="date">{{$data->salary}}</td>
                                                         <td>
+                                                            <a href="{{ route('single.employees', $data->id) }}" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>View</a>
                                                            <a href="{{ route('employees.edit', $data->id) }}" class="btn btn-warning btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>Edit</a>
                                                            <form action="{{ route('employees.destroy', $data->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this emloyee?');">
                                                             @csrf

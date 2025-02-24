@@ -1,4 +1,4 @@
-@extends('employees.includes.app')
+@extends('includes.app')
 
 @section('title')
     Employee | Profile
@@ -8,23 +8,24 @@
 @section('content')
 
 <div class="page-content">
+     @foreach($emp as $emps)
                 <div class="container-fluid">
                     <div class="profile-foreground position-relative mx-n4 mt-n4">
                         <div class="profile-wid-bg">
-                            <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="" class="profile-wid-img" />
+                            <img height="70" width="120" src="/{{$emps->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$emps->image }}" class="profile-wid-img" />
                         </div>
                     </div>
                     <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
                         <div class="row g-4">
                             <div class="col-auto">
                                 <div class="avatar-lg">
-                                    <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="user-img" class="img-thumbnail rounded-circle" />
+                                    <img src="/{{$emps->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$emps->image }}"alt="user-img" class="img-thumbnail rounded-circle" />
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col">
                                 <div class="p-2">
-                                    @foreach($emp as $emps)
+                                   
                                     <h3 class="text-white mb-1">{{$emps->name}}</h3>
                                     <p class="text-white text-opacity-75">{{$emps->position}}</p>
                                     <div class="hstack text-white-50 gap-1">
@@ -86,7 +87,7 @@
                                         </li>
                                     </ul>
                                     <div class="flex-shrink-0">
-                                        <a href="{{route('employees.profile.edit',$emps->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
+                                        <a href="{{route('employees.edit',$emps->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Employee</a>
                                     </div>
                                 </div>
                                 <!-- Tab panes -->

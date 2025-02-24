@@ -69,7 +69,7 @@
                                     <li class="nav-item nav-link">
                                         
 
-                                               <a class="dropdown-item" href="{{ route('employees.Profile') }}"> <span class="align-middle">Profile</span></a>
+                                               <a class="dropdown-item" href="{{ route('admin.profile') }}"> <span class="align-middle">Profile</span></a>
 
 
                                        

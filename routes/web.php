@@ -40,6 +40,13 @@ Route::group(['middleware' => 'employee'], function () {
 
 Route::group(['middleware' => 'user'], function () {
 
+    Route::get('/admin/profile', [EmployeeController::class, 'admin_profile'])->name('admin.profile');
+
+    Route::get('/admin/profile/{user}/edit', [EmployeeController::class, 'admin_profile_edit'])->name('admin.profile.edit');
+
+    Route::put('/admin/profile/{user}/update', [EmployeeController::class, 'admin_profile_update'])->name('admin.profile.update');
+
+
      Route::get('/complain/show', [EmployeeController::class, 'show_complain'])->name('complain.show');
 
     Route::get('/complain/{complain}/approve', [EmployeeController::class, 'approve_complain'])->name('complain.approve');
@@ -60,6 +67,8 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employees.show');
+     Route::get('/employees/{employee}/view', [EmployeeController::class, 'single_view_employees'])->name('single.employees');
+
     Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
     Route::put('/employees/{employee}/update', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');

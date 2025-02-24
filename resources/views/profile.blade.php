@@ -1,4 +1,4 @@
-@extends('employees.includes.app')
+@extends('includes.app')
 
 @section('title')
     Employee | Profile
@@ -11,22 +11,22 @@
                 <div class="container-fluid">
                     <div class="profile-foreground position-relative mx-n4 mt-n4">
                         <div class="profile-wid-bg">
-                            <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="" class="profile-wid-img" />
+                            <img src="{{asset('assets/images/users/user-dummy-img.jpg')}}" alt="" class="profile-wid-img" />
                         </div>
                     </div>
                     <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
                         <div class="row g-4">
                             <div class="col-auto">
                                 <div class="avatar-lg">
-                                    <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="user-img" class="img-thumbnail rounded-circle" />
+                                    <img src="{{asset('assets/images/users/user-dummy-img.jpg')}}" alt="user-img" class="img-thumbnail rounded-circle" />
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col">
                                 <div class="p-2">
-                                    @foreach($emp as $emps)
-                                    <h3 class="text-white mb-1">{{$emps->name}}</h3>
-                                    <p class="text-white text-opacity-75">{{$emps->position}}</p>
+                                    @foreach($user as $users)
+                                    <h3 class="text-white mb-1">{{$users->name}}</h3>
+                                    <p class="text-white text-opacity-75">{{$users->email}}</p>
                                     <div class="hstack text-white-50 gap-1">
                                         <div class="me-2"><i class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>California, United States</div>
                                         <div>
@@ -86,7 +86,7 @@
                                         </li>
                                     </ul>
                                     <div class="flex-shrink-0">
-                                        <a href="{{route('employees.profile.edit',$emps->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
+                                        <a href="{{route('admin.profile.edit',$users->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                                     </div>
                                 </div>
                                 <!-- Tab panes -->
@@ -113,25 +113,14 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Full Name :</th>
-                                                                        <td class="text-muted">{{$emps->name}}</td>
+                                                                        <td class="text-muted">{{$users->name}}</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th class="ps-0" scope="row">Mobile :</th>
-                                                                        <td class="text-muted">{{$emps->phone}}</td>
-                                                                    </tr>
+                                                                    
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">E-mail :</th>
-                                                                        <td class="text-muted">{{$emps->email}}</td>
+                                                                        <td class="text-muted">{{$users->email}}</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th class="ps-0" scope="row">Department :</th>
-                                                                        <td class="text-muted">{{$emps->departments->name}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th class="ps-0" scope="row">Joining Date</th>
-                                                                        <td class="text-muted">{{$emps->created_at}}</td>
-                                                                    </tr>
+                                                                  
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>

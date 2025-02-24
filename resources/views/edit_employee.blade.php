@@ -44,7 +44,7 @@
                             <div class="alert alert-danger"> {{Session::get('error')}} </div>
                         @endif
                         <div class="live-preview">
-                            <form action="{{route('employees.update',$datas->id)}}" method="POST">
+                            <form action="{{route('employees.update',$datas->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                             <div class="row gy-4">
@@ -116,6 +116,20 @@
                                     </div>
                                     
                                 </div>
+                                <!--end col-->
+
+                                <div class="col-xxl-3 col-md-6">
+                                    <div>
+                                        <label for="readonlyInput" class="form-label">Image</label>
+                                        <input type="file" name="image" class="form-control"  >
+                                    </div>
+                                   
+                                </div>
+
+                               <div class="col-xxl-3 col-md-6">
+                    <label>Current image</label>
+                  <img height="70" width="120" src="/{{$datas->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$datas->image }}">
+                </div>
                                 <!--end col-->
 
                                 <center>

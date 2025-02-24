@@ -44,7 +44,7 @@
                             <div class="alert alert-danger"> {{Session::get('error')}} </div>
                         @endif
                         <div class="live-preview">
-                            <form action="{{route('employees.store')}}" method="POST">
+                            <form action="{{route('employees.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                             <div class="row gy-4">
                                 
@@ -124,6 +124,17 @@
                                         <input type="text" name="salary" class="form-control"  >
                                     </div>
                                     @error('salary')
+                                    <p class="text-danger">{{$message}}</p>
+                                 @enderror
+                                </div>
+                                <!--end col-->
+
+                                <div class="col-xxl-3 col-md-6">
+                                    <div>
+                                        <label for="readonlyInput" class="form-label">Image</label>
+                                        <input type="file" name="image" class="form-control"  >
+                                    </div>
+                                    @error('image')
                                     <p class="text-danger">{{$message}}</p>
                                  @enderror
                                 </div>
