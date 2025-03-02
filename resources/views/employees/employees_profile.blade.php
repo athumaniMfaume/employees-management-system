@@ -27,16 +27,16 @@
                                     @foreach($emp as $emps)
                                     <h3 class="text-white mb-1">{{$emps->name}}</h3>
                                     <p class="text-white text-opacity-75">{{$emps->position}}</p>
-                                    <div class="hstack text-white-50 gap-1">
+                                  <!--   <div class="hstack text-white-50 gap-1">
                                         <div class="me-2"><i class="ri-map-pin-user-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>California, United States</div>
                                         <div>
                                             <i class="ri-building-line me-1 text-white text-opacity-75 fs-16 align-middle"></i>Themesbrand
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!--end col-->
-                            <div class="col-12 col-lg-auto order-last order-lg-0">
+                           <!--  <div class="col-12 col-lg-auto order-last order-lg-0">
                                 <div class="row text text-white-50 text-center">
                                     <div class="col-lg-6 col-4">
                                         <div class="p-2">
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!--end col-->
 
                         </div>
@@ -69,7 +69,7 @@
                                                 <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Overview</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
+                                  <!--       <li class="nav-item">
                                             <a class="nav-link fs-14" data-bs-toggle="tab" href="#activities" role="tab">
                                                 <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Activities</span>
                                             </a>
@@ -83,7 +83,7 @@
                                             <a class="nav-link fs-14" data-bs-toggle="tab" href="#documents" role="tab">
                                                 <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Documents</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                     <div class="flex-shrink-0">
                                         <a href="{{route('employees.profile.edit',$emps->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
@@ -94,7 +94,7 @@
                                     <div class="tab-pane active" id="overview-tab" role="tabpanel">
                                         <div class="row">
                                             <div class="col-xxl-3">
-                                                <div class="card">
+                                               <!--  <div class="card">
                                                     <div class="card-body">
                                                         <h5 class="card-title mb-5">Complete Your Profile</h5>
                                                         <div class="progress animated-progress custom-progress progress-label">
@@ -103,7 +103,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
 
                                                 <div class="card">
                                                     <div class="card-body">
