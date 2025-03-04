@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ComplainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 
-
-
-Route::post('leaves/{id}/approve', [LeaveController::class, 'approve'])->name('leaves.approve');
 
 
 
@@ -40,52 +38,50 @@ Route::group(['middleware' => 'employee'], function () {
 
 Route::group(['middleware' => 'user'], function () {
 
-    Route::get('/admin/profile', [EmployeeController::class, 'admin_profile'])->name('admin.profile');
+    Route::get('/admin/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
 
-    Route::get('/admin/profile/{user}/edit', [EmployeeController::class, 'admin_profile_edit'])->name('admin.profile.edit');
+    Route::get('/admin/profile/{user}/edit', [AdminController::class, 'admin_profile_edit'])->name('admin.profile.edit');
 
-    Route::put('/admin/profile/{user}/update', [EmployeeController::class, 'admin_profile_update'])->name('admin.profile.update');
-
-
-     Route::get('/complain/show', [EmployeeController::class, 'show_complain'])->name('complain.show');
-
-    Route::get('/complain/{complain}/approve', [EmployeeController::class, 'approve_complain'])->name('complain.approve');
-
-    Route::put('/complain/{complain}/approve_complain_post', [EmployeeController::class, 'approve_complain_post'])->name('approve_complain_post');
+    Route::put('/admin/profile/{user}/update', [AdminController::class, 'admin_profile_update'])->name('admin.profile.update');
 
 
-    Route::get('/leave/show', [EmployeeController::class, 'show_leave'])->name('leave.show');
+     Route::get('/admin/complain/show', [AdminController::class, 'show_complain'])->name('complain.show');
 
-    Route::get('/leave/{leave}/approve', [EmployeeController::class, 'approve_leave'])->name('leave.approve');
+    Route::get('/admin/complain/{complain}/approve', [AdminController::class, 'approve_complain'])->name('complain.approve');
 
-    Route::put('/leave/{leave}/approve_leave_post', [EmployeeController::class, 
+    Route::put('/admin/complain/{complain}/approve_complain_post', [AdminController::class, 'approve_complain_post'])->name('approve_complain_post');
+
+
+    Route::get('/admin/leave/show', [AdminController::class, 'show_leave'])->name('leave.show');
+
+    Route::get('/admin/leave/{leave}/approve', [AdminController::class, 'approve_leave'])->name('leave.approve');
+
+    Route::put('/admin/leave/{leave}/approve_leave_post', [AdminController::class, 
         'approve_leave_post'])->name('approve_leave_post');
     
 
-    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('/admin/employees/view', [AdminController::class, 'view_employees'])->name('employees.view');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-    Route::post('/employees/store', [EmployeeController::class, 'store'])->name('employees.store');
-    Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employees.show');
-     Route::get('/employees/{employee}/view', [EmployeeController::class, 'single_view_employees'])->name('single.employees');
-
-    Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
-    Route::put('/employees/{employee}/update', [EmployeeController::class, 'update'])->name('employees.update');
-    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
-
-
-    Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
-    Route::post('/departments/store', [DepartmentController::class, 'store'])->name('departments.store');
-    Route::get('/departments/show', [DepartmentController::class, 'show'])->name('departments.show');
-    Route::get('/departments/{departments}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
-    Route::put('/departments/{departments}/update', [DepartmentController::class, 'update'])->name('departments.update');
-    Route::delete('/departments/{departments}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
-
-
-
+    Route::get('/admin/employees/create', [AdminController::class, 'create_employees'])->name('employees.create');
+    Route::post('/admin/employees/store', [AdminController::class, 'store_employee'])->name('employees.store');
     
-    
+     Route::get('/admin/employees/{employee}/show', [AdminController::class, 'single_view_employees'])->name('single.employees');
+
+    Route::get('/admin/employees/{employee}/edit', [AdminController::class, 'edit_employee'])->name('employees.edit');
+    Route::put('/admin/employees/{employee}/update', [AdminController::class, 'update_employee'])->name('employees.update');
+    Route::delete('/admin/employees/{employee}', [AdminController::class, 'destroy_employee'])->name('employees.destroy');
+
+
+    Route::get('/admin/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
+    Route::post('/admin/departments/store', [DepartmentController::class, 'store'])->name('departments.store');
+    Route::get('/admin/departments/index', [DepartmentController::class, 'index'])->name('departments.index');
+    Route::get('/admin/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
+    Route::put('/admin/departments/{department}/update', [DepartmentController::class, 'update'])->name('departments.update');
+    Route::delete('/admin/departments/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
+  
 });
+
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/post', [AuthController::class, 'registerPost'])->name('registerPost');
@@ -93,8 +89,11 @@ Route::post('/register/post', [AuthController::class, 'registerPost'])->name('re
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login/post', [AuthController::class, 'loginPost'])->name('loginPost');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    
+    // Routes for authorized users to change their password
     Route::get('/change_password', [AuthController::class, 'change_password'])->name('change_password');
     Route::post('/change_password/post', [AuthController::class, 'change_password_post'])->name('change_password_post');
 
+    // Route for logging out (authenticated users)
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

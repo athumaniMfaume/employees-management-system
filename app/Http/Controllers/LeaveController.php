@@ -1,13 +1,20 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
 use App\Models\Leave;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreLeaveRequest;
+use App\Http\Requests\UpdateLeaveRequest;
+use App\Services\LeaveService;
 use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
 {
+    protected $leaveService;
+   
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -22,11 +29,11 @@ class LeaveController extends Controller
         return view('employees.leaves.view_leaves',compact('datas'));
     }
 
-     public function single_employee_leave_view()
+    public function single_employee_leave_view()
     {
         $emp_id = Auth::guard('employee')->user()->id;
-        $datas = Leave::where('employee_id',$emp_id)->get();
-        return view('employees.leaves.view_leaves',compact('datas'));
+        $datas = Leave::where('employee_id', $emp_id)->get();
+        return view('employees.leaves.view_leaves', compact('datas'));
     }
 
     /**
@@ -40,90 +47,54 @@ class LeaveController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-{
-    $request->validate([
-        'type' => 'required|string',
-        'reason' => 'required|string',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-    ]);
-
-               $data = new Leave();
-            $data->type = $request->type;
-            $data->reason = $request->reason;
-            $data->start_date = $request->start_date;
-            $data->end_date = $request->end_date;
-             // Get the authenticated employee's ID and set it to the 'employee_id' field
-             $data->employee_id = Auth::guard('employee')->user()->id;
-
-    if ($data->save()) {
-            return redirect()->route('single.employee.leaves.view')->with('success','Leave Added Successfully!');
-        }
-
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
-        }
-}
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Leave $leave)
+    public function store(StoreLeaveRequest $request)
     {
-        //
+        $data = $request->validated(); // Get validated data from request
+
+        if ($this->leaveService->storeLeave($data)) {
+            return redirect()->route('single.employee.leaves.view')->with('success', 'Leave Added Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error, Please Try Again Later!');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $leave)
+    public function edit($leave)
     {
         $datas = Leave::findOrFail($leave);
-        return view('employees.leaves.edit_leaves',compact('datas'));
+        return view('employees.leaves.edit_leaves', compact('datas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$leave)
+    public function update(UpdateLeaveRequest $request, $leave)
     {
-        $request->validate([
-            'type' => 'sometimes',
-            'reason' => 'sometimes',
-            'start_date' => 'sometimes',
-            'end_date' => 'sometimes',
-        ]);
+        $data = $request->validated(); // Get validated data from request
+        $leave = Leave::findOrFail($leave);
 
-         $data = Leave::findOrFail($leave);
-
-        $data->type = $request->type;
-        $data->reason = $request->reason;
-        $data->start_date = $request->start_date;
-        $data->end_date = $request->end_date;
-        
-
-        if ($data->update()) {
-            return redirect()->route('single.employee.leaves.view')->with('success','Leave Updated Successfully!');
-        }
-
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        if ($this->leaveService->updateLeave($leave, $data)) {
+            return redirect()->route('single.employee.leaves.view')->with('success', 'Leave Updated Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error, Please Try Again Later!');
         }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $leave)
+    public function destroy($leave)
     {
-         $datas = Leave::findOrFail($leave);
-        if ($datas->delete()) {
-            return redirect()->back()->with('success','Leave Delete Successfully!');
-        }
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
+        $leave = Leave::findOrFail($leave);
+
+        if ($this->leaveService->deleteLeave($leave)) {
+            return redirect()->back()->with('success', 'Leave Deleted Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error, Please Try Again Later!');
         }
     }
 }

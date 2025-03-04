@@ -89,7 +89,7 @@
                                         @endif
                                         <div>
                                             <h5 class="text-primary">Login Account</h5>
-                                            <p class="text-muted">Get your Free Velzon account now.</p>
+                                            
                                         </div>
 
                                         <div class="mt-4">
@@ -146,7 +146,7 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-         @include('includes.footer')
+         @include('admin.includes.footer')
         <!-- end Footer -->
     </div>
     <!-- end auth-page-wrapper -->

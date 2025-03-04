@@ -120,7 +120,7 @@ public function change_password_post(Request $request)
 
     // Attempt login as Admin (User)
     if (Auth::guard('web')->attempt($credentials)) {
-        return redirect()->route('employees.index')->with('success', 'Login Successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'Login Successfully');
     }
 
     // Attempt login as Employee

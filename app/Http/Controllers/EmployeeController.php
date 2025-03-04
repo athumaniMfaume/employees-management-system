@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEmployeeRequest;
+use App\Services\EmployeeService;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Department;
@@ -16,9 +18,16 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    protected $employeeService;
+
+    // Inject EmployeeService
+    public function __construct(EmployeeService $employeeService)
+    {
+        $this->employeeService = $employeeService;
+    }
+
+
     public function index()
     {
         $leave = Leave::all()->count();
@@ -35,7 +44,7 @@ class EmployeeController extends Controller
         $complain = Complain::where('employee_id',$emp_id)->count();
         $deps = Department::all()->count();
         $emp = Employee::all()->count();
-        return view('employees.employees_dashboard',compact('deps','emp','leave','complain'));
+        return view('employees.index',compact('deps','emp','leave','complain'));
     }
 
 
@@ -55,7 +64,7 @@ class EmployeeController extends Controller
         $complain = Complain::where('employee_id',$emp_id)->count();
         $emp = Employee::with('departments')->where('id',$emp_id)->get();
         $deps = Department::all()->count();
-        return view('employees.employees_profile',compact('deps','emp','leave','complain'));
+        return view('employees.profile.index',compact('deps','emp','leave','complain'));
     }
 
     public function admin_profile()
@@ -75,8 +84,8 @@ class EmployeeController extends Controller
     public function admin_profile_update(Request $request, $user)
     {
         $request->validate([
-            'name' => 'sometimes',
-            'email' => 'sometimes|email',
+            'name' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'email' => ' sometimes|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
         ]);
 
         $data = User::findOrFail($user);
@@ -97,49 +106,28 @@ class EmployeeController extends Controller
     {
         $datas = Employee::with('departments')->findOrFail($employee);
         $deps = Department::all();
-        return view('employees.employees_profile_edit',compact('datas','deps'));
+        return view('employees.profile.edit',compact('datas','deps'));
     }
 
-     public function employees_profile_update(Request $request, $employee)
+
+
+        public function employees_profile_update(UpdateEmployeeRequest $request, $employeeId)
     {
-        $request->validate([
-            'name' => 'sometimes',
-            'department_id' => 'sometimes',
-            'position' => 'sometimes',
-            'email' => 'sometimes|email',
-            'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
-            'phone' => 'sometimes',
-            'dob' => 'sometimes',
-            'salary' => 'sometimes',
-        ]);
+        // Retrieve validated data from the request
+        $data = $request->validated();
 
-      
+        // Find the employee by ID
+        $employee = Employee::findOrFail($employeeId);
 
-        $data = Employee::findOrFail($employee);
+        // Use the EmployeeService to update the employee
+        $this->employeeService->updateEmployee($data, $employee);
 
-          $image = $request->image;
-    if ($image) {
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->image->move(public_path('/images'), $imagename);
-            $data->image = $imagename;
-        }
-
-        $data->name = $request->name;
-        $data->department_id = $request->department_id;
-        $data->position = $request->position;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-        $data->dob = $request->dob;
-        $data->salary = $request->salary;
-
-        if ($data->update()) {
-            return redirect()->route('employees.profile')->with('success','Employee Updated Successfully!');
-        }
-
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
-        }
+        // Redirect back with success message
+        return redirect()->route('employees.profile')->with('success', 'Employee Updated Successfully!');
     }
+
+
+    
 
 
     public function show_complain()
@@ -170,9 +158,9 @@ class EmployeeController extends Controller
      public function approve_complain_post(Request $request, $complain)
     {
           $request->validate([
-            'subject' => 'sometimes',
-            'content' => 'sometimes',
-            'status' => 'sometimes',
+            'subject' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'content' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'status' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
             
             
         ]);
@@ -196,11 +184,11 @@ class EmployeeController extends Controller
      public function approve_leave_post(Request $request, $leave)
     {
           $request->validate([
-            'type' => 'sometimes',
-            'reason' => 'sometimes',
-            'start_date' => 'sometimes',
-            'end_date' => 'sometimes',
-            'status' => 'sometimes',
+            'type' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'reason' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
             
             
         ]);
@@ -232,129 +220,8 @@ class EmployeeController extends Controller
         return view('add_employee',compact('deps'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'department_id' => 'required', 
-        'position' => 'required',
-        'email' => 'required|email|unique:employees,email',
-        'phone' => 'required',
-        'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
-        'dob' => 'required',
-        'salary' => 'required',
-    ]);
-
-    // Generate a password (you can also use a random password generator)
-    $password = 123;
-
-    // Create a new employee
-    $data = new Employee();
-
-    $image = $request->image;
-    if ($image) {
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->image->move(public_path('/images'), $imagename);
-            $data->image = $imagename;
-        }
-
-    $data->name = $request->name;
-    $data->department_id = $request->department_id;
-    $data->position = $request->position;
-    $data->email = $request->email;
-    $data->password = Hash::make($password); // Save the password as hashed
-    $data->phone = $request->phone;
-    $data->dob = $request->dob;
-    $data->salary = $request->salary;
+  
+ 
 
 
-    if ($data->save()) {
-        // Send the email to the employee
-         Mail::to($data->email)->send(new EmployeeCredentialsNotification($data->email, $password));
-
-        return redirect()->route('employees.show')->with('success', 'Employee Added Successfully!');
-    } else {
-        return redirect()->back()->with('error', 'Error, Please Try Again Later!');
-    }
-}
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        $datas = Employee::with('departments')->get();
-        return view('view_employee',compact('datas'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( $employee)
-    {
-        $datas = Employee::with('departments')->findOrFail($employee);
-        $deps = Department::all();
-        return view('edit_employee',compact('datas','deps'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $employee)
-    {
-        $request->validate([
-            'name' => 'sometimes',
-            'department_id' => 'sometimes',
-            'position' => 'sometimes',
-            'email' => 'sometimes|email',
-            'phone' => 'sometimes',
-            'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
-            'dob' => 'sometimes',
-            'salary' => 'sometimes',
-        ]);
-
-        $data = Employee::findOrFail($employee);
-        $image = $request->image;
-        
-        if ($image) {
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->image->move(public_path('/images'), $imagename);
-            $data->image = $imagename;
-        }
-
-        $data->name = $request->name;
-        $data->department_id = $request->department_id;
-        $data->position = $request->position;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-        $data->dob = $request->dob;
-        $data->salary = $request->salary;
-       
-
-
-        if ($data->update()) {
-            return redirect()->route('employees.show')->with('success','Employee Updated Successfully!');
-        }
-
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy( $employee)
-    {
-        $datas = Employee::findOrFail($employee);
-        if ($datas->delete()) {
-            return redirect()->back()->with('success','Employee Delete Successfully!');
-        }
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
-        }
-    }
 }
