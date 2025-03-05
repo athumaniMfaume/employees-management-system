@@ -66,7 +66,9 @@ public function __construct(
 
     public function update_employee(UpdateEmployeeRequest $request, Employee $employee)
     {
+        // dd($request->validated()); 
         $this->employeeService->updateEmployee($request->validated(), $employee);
+          // dd($request->all());
 
         return redirect()->route('employees.view')->with('success', 'Employee Updated Successfully!');
     }

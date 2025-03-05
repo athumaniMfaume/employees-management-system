@@ -63,6 +63,22 @@
                                 </div>
                                 <!--end col-->
 
+<div class="col-xxl-3 col-md-6">
+    <div>
+        <label for="basiInput" class="form-label">Gender</label>
+        <select name="gender" class="form-control">
+            <option value="" disabled {{ old('gender', $employee->gender) == '' ? 'selected' : '' }}>Select Gender</option>
+            <option value="male" {{ old('gender', $employee->gender) == 'male' ? 'selected' : '' }}>Male</option>
+            <option value="female" {{ old('gender', $employee->gender) == 'female' ? 'selected' : '' }}>Female</option>
+            <option value="other" {{ old('gender', $employee->gender) == 'other' ? 'selected' : '' }}>Other</option>
+        </select>
+    </div>
+    @error('gender')
+        <p class="text-danger">{{$message}}</p>
+    @enderror
+</div>
+
+
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Department</label>

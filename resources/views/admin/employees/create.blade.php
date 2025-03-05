@@ -60,6 +60,24 @@
                                         @enderror
                                 </div>
 
+                                  <div class="col-xxl-3 col-md-6">
+                                    <div>
+                                        <label for="basiInput" class="form-label">Gender</label>
+                                        <select name="gender" class="form-control" >
+                                            <option value="" disabled selected> Select Gender</option>
+                                            
+                                                        <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+                                            
+                                        </select>
+                                        
+                                    </div>
+                                    @error('gender')
+                                           <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                </div>
+
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Department</label>

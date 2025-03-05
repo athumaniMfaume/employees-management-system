@@ -12,7 +12,7 @@ class Employee extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'password', 'position', 'phone', 'dob', 'salary', 'department_id','image'
+        'name', 'gender', 'email', 'password', 'position', 'phone', 'dob', 'salary', 'department_id','image'
     ];
 
 

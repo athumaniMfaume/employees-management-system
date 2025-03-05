@@ -69,21 +69,7 @@
                                                 <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Overview</span>
                                             </a>
                                         </li>
-                                  <!--       <li class="nav-item">
-                                            <a class="nav-link fs-14" data-bs-toggle="tab" href="#activities" role="tab">
-                                                <i class="ri-list-unordered d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Activities</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link fs-14" data-bs-toggle="tab" href="#projects" role="tab">
-                                                <i class="ri-price-tag-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Projects</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link fs-14" data-bs-toggle="tab" href="#documents" role="tab">
-                                                <i class="ri-folder-4-line d-inline-block d-md-none"></i> <span class="d-none d-md-inline-block">Documents</span>
-                                            </a>
-                                        </li> -->
+                               
                                     </ul>
                                     <div class="flex-shrink-0">
                                         <a href="{{route('employees.profile.edit',$emps->id)}}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
@@ -94,16 +80,7 @@
                                     <div class="tab-pane active" id="overview-tab" role="tabpanel">
                                         <div class="row">
                                             <div class="col-xxl-3">
-                                               <!--  <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title mb-5">Complete Your Profile</h5>
-                                                        <div class="progress animated-progress custom-progress progress-label">
-                                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
-                                                                <div class="label">30%</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                            
 
                                                 <div class="card">
                                                       @if (Session::has('success'))
@@ -117,6 +94,10 @@
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Full Name :</th>
                                                                         <td class="text-muted">{{$emps->name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th class="ps-0" scope="row">Gender</th>
+                                                                        <td class="text-muted">{{$emps->gender}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th class="ps-0" scope="row">Mobile :</th>

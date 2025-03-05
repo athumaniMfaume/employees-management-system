@@ -49,7 +49,7 @@
                 <!-- Dark Logo-->
                 <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22">
+                        <!-- <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22"> -->
                     </span>
                     <span class="logo-lg">
                         <img src="{{asset('assets/images/logo-dark.png')}}" alt="" height="17">

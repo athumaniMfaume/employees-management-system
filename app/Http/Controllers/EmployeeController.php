@@ -48,14 +48,6 @@ class EmployeeController extends Controller
     }
 
 
-    public function single_view_employees($employee)
-    {
- 
-        $emp = Employee::with('departments')->where('id',$employee)->get();
-        return view('single_view_employee',compact('emp'));
-    }
-
-
 
     public function employees_profile()
     {
@@ -67,40 +59,9 @@ class EmployeeController extends Controller
         return view('employees.profile.index',compact('deps','emp','leave','complain'));
     }
 
-    public function admin_profile()
-    {
-        $emp_id = Auth::user()->id;
-        $user = User::where('id',$emp_id)->get();
-        return view('profile',compact('user'));
-    }
 
-    public function admin_profile_edit( $user)
-    {
-        $datas = User::findOrFail($user);
-     
-        return view('admin_profile_edit',compact('datas'));
-    }
 
-    public function admin_profile_update(Request $request, $user)
-    {
-        $request->validate([
-            'name' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
-            'email' => ' sometimes|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
-        ]);
-
-        $data = User::findOrFail($user);
-
-        $data->name = $request->name;
-        $data->email = $request->email;
-
-        if ($data->update()) {
-            return redirect()->route('admin.profile')->with('success','Admin Info Updated Successfully!');
-        }
-
-        else {
-            return redirect()->back()->with('error','Error, Please Try Again Later!');
-        }
-    }
+   
 
     public function employees_profile_edit( $employee)
     {
@@ -143,17 +104,7 @@ class EmployeeController extends Controller
     }
 
 
-    public function approve_complain( $complain)
-    {
-        $datas = Complain::findOrFail($complain);
-        return view('approve_complain',compact('datas'));
-    }
 
-      public function approve_leave( $leave)
-    {
-        $datas = Leave::findOrFail($leave);
-        return view('approve_leave',compact('datas'));
-    }
 
      public function approve_complain_post(Request $request, $complain)
     {
@@ -211,14 +162,7 @@ class EmployeeController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $deps = Department::all();
-        return view('add_employee',compact('deps'));
-    }
+   
 
   
  

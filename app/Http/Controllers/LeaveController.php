@@ -12,7 +12,10 @@ class LeaveController extends Controller
 {
     protected $leaveService;
    
-
+    public function __construct(LeaveService $leaveService)
+    {
+        $this->leaveService = $leaveService; // Assign LeaveService to the property
+    }
 
 
     /**

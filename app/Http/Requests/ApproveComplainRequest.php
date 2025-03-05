@@ -22,8 +22,8 @@ class ApproveComplainRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
-            'content' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
-            'status' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'subject' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
+            'content' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
+            'status' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
         ];    }
 }

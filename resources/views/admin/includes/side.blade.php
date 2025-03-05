@@ -5,99 +5,83 @@
                     </div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                           <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                               <i class="mdi mdi-account-group"></i> <span data-key="t-dashboards">Employees</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarDashboards">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{route('employees.create')}}" class="nav-link" data-key="t-analytics"> Add </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('employees.view')}}" class="nav-link" data-key="t-crm"> View</a>
+                                    </li>
+                                  
+                                 
+                                </ul>
+                            </div>
+                        </li> <!-- end Dashboard Menu -->
 
                         <li class="nav-item">
-                                        <a href="#sidebarEcommerce" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEcommerce" data-key="t-ecommerce"> Employee
-                                        </a>
-                                        <div class="collapse menu-dropdown" id="sidebarEcommerce">
-                                            <ul class="nav nav-sm flex-column">
+                            <a class="nav-link menu-link" href="#sidebarUI" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarUI">
+                                <i class="mdi mdi-office-building"></i> <span data-key="t-base-ui">Departments</span>
+                            </a>
+                            <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarUI">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{{route('departments.create')}}" class="nav-link" data-key="t-alerts">Add</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{route('departments.index')}}" class="nav-link" data-key="t-badges">View</a>
+                                            </li>
+                                         
+                                          
+                                        </ul>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </li>
+
+
+
+                                                   <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{route('complain.show')}}">
+                                <i class="mdi mdi-message-alert-outline"></i> <span data-key="t-widgets">Complain</span>
+                            </a>
+                        </li>
+
+                            <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{route('leave.show')}}">
+                                <i class="mdi mdi-calendar-check"></i></i> <span data-key="t-widgets">Leave</span>
+                            </a>
+                        </li>
+
+                                 <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{route('admin.profile')}}">
+                                <i class="mdi mdi-account-circle"></i>
+                                  <span data-key="t-widgets">Profile</span>
+                            </a>
+                        </li>
+
+                                 <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('change_password') }}">
+                                <i class="mdi mdi-lock-reset"></i> <span data-key="t-widgets">Change Password</span>
+                            </a>
+                        </li>
+
                                                 <li class="nav-item">
-                                                    <a href="{{route('employees.create')}}" class="nav-link" data-key="t-products"> Add </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="{{route('employees.view')}}" class="nav-link" data-key="t-product-Details"> View </a>
-                                                </li>
-                                              
-                                            </ul>
-                                        </div>
-                                    </li>
+    <a class="nav-link menu-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="mdi mdi-logout"></i> <span data-key="t-widgets">Logout</span>
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</li>
 
-
-                                    <li class="nav-item">
-                                        <a href="#sidebarProjects" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProjects" data-key="t-projects">Departments
-                                        </a>
-                                        <div class="collapse menu-dropdown" id="sidebarProjects">
-                                            <ul class="nav nav-sm flex-column">
-                                                <li class="nav-item">
-                                                    <a href="{{route('departments.create')}}" class="nav-link" data-key="t-list"> Add </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a href="{{route('departments.index')}}" class="nav-link" data-key="t-overview"> View </a>
-                                                </li>
-                                               
-                                            </ul>
-                                        </div>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#sidebarCRM" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCRM" data-key="t-crm"> Complaints
-                                        </a>
-                                        <div class="collapse menu-dropdown" id="sidebarCRM">
-                                            <ul class="nav nav-sm flex-column">
-                                                <li class="nav-item">
-                                                    <a href="{{route('complain.show')}}" class="nav-link" data-key="t-contacts"> View </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#sidebarCrypto" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCrypto"> Leave
-                                        </a>
-                                        <div class="collapse menu-dropdown" id="sidebarCrypto">
-                                            <ul class="nav nav-sm flex-column">
-                                                <li class="nav-item">
-                                                    <a href="{{route('leave.show')}}" class="nav-link" data-key="t-transactions"> View </a>
-                                                </li>
-                                                
-                                               
-                                            </ul>
-                                        </div>
-                                    </li>
-
-
-                                    <li class="nav-item nav-link">
-                                        
-
-                                               <a class="dropdown-item" href="{{ route('admin.profile') }}"> <span class="align-middle">Profile</span></a>
-
-
-                                       
-                                                                          </li>
-
-                                      <li class="nav-item nav-link">
-                                        
-
-                                               <a class="dropdown-item" href="{{ route('change_password') }}"> <span class="align-middle">Change Password</span></a>
-
-
-                                       
-                                                                          </li>
-
-
-
-
-                                    <li class="nav-item nav-link">
-                                        
-
-                                              <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                            @csrf
-
-                    <button type="submit" class="dropdown-item ">Logout</button>
-                </form>
-
-                                       
-                                                                          </li>
 
                       
                        

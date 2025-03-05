@@ -23,6 +23,7 @@ class UpdateEmployeeRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+            'gender' => 'nullable|in:male,female,other',
             'department_id' => 'sometimes',
             'position' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
             'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',

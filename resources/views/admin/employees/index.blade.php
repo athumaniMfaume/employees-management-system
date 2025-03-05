@@ -138,6 +138,7 @@
                                                         <th> S/N </th>
                                                         <th class="sort" data-sort="customer_name">Image</th>
                                                         <th class="sort" data-sort="customer_name">Name</th>
+                                                         <th class="sort" data-sort="customer_name">Gender</th>
                                                         <th class="sort" data-sort="email">Department</th>
                                                         <th class="sort" data-sort="email">Position</th>
                                                         <th class="sort" data-sort="phone">Email</th>
@@ -155,8 +156,9 @@
                                                     <tr>
                                                         <th>{{$data->id}}</th>
                                                         <td><img height="70" width="120" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
-                                                        <td class="customer_name" >{{$data->name}}</td>
-                                                        <td class="customer_name">{{$data->departments->name}}</td>
+                                                          <td class="customer_name" >{{ $data->name}}</td>
+                                                        <td class="customer_name" >{{ $data->gender ?? ' ' }}</td>
+                                                        <td class="date">{{$data->departments->name}}</td>
                                                         <td class="customer_name">{{$data->position}}</td>
                                                         <td class="email">{{$data->email}}</td>
                                                         <td class="phone">{{$data->dob}}</td>

@@ -22,8 +22,8 @@ class StoreComplainRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
-            'content' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
+            'subject' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:255',
+            'content' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:255',
         ];
     }
 }

@@ -23,6 +23,7 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
+            'gender' => 'nullable|in:male,female,other',
             'department_id' => 'required',
             'position' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
             'email' => 'required|email|unique:employees,email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',

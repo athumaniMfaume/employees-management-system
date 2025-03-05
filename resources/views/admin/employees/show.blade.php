@@ -71,6 +71,10 @@
                                                                         <td class="text-muted">{{$employee->name}}</td>
                                                                     </tr>
                                                                     <tr>
+                                                                        <th class="ps-0" scope="row">Gender :</th>
+                                                                        <td class="text-muted">{{$employee->gender}}</td>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <th class="ps-0" scope="row">Mobile :</th>
                                                                         <td class="text-muted">{{$employee->phone}}</td>
                                                                     </tr>
