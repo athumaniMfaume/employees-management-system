@@ -1,7 +1,7 @@
 @extends('employees.includes.app')
 
 @section('title')
-    Employee | Add Complaints
+    Employee | Complain | Add
 @endsection
 
 

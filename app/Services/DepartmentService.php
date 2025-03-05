@@ -8,7 +8,7 @@ class DepartmentService
 {
 	public function getAllDepartments()
     {
-        return Department::all();  // Fetches all departments
+        return Department::all();  
     }
 
     public function createDepartment(array $data)

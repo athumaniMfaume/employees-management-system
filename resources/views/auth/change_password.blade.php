@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Employee | Change Password</title>
+    <title>Employee Management System | Change Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -60,14 +60,14 @@
                                                         <button type="button" data-bs-target="#qoutescarouselIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                                     </div>
                                                     <div class="carousel-inner text-center text-white-50 pb-5">
-                                                        <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                         <div class="carousel-item active">
+                                                            <p class="fs-15 fst-italic">" This system makes employee management seamless and efficient. A game-changer for our HR team! "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
+                                                            <p class="fs-15 fst-italic">" User-friendly interface and excellent features for tracking employee records. Highly recommended! "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
+                                                            <p class="fs-15 fst-italic">" Managing employees, leave requests, and payroll has never been easier. A must-have for any company! "</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,7 +88,7 @@
                                           <div class="alert alert-success"> {{Session::get('success')}} </div>
                                         @endif
                                         <h5 class="text-primary">Create new password</h5>
-                                        <p class="text-muted">Your new password must be different from previous used password.</p>
+                                      
 
                                         <div class="p-2">
                                             <form action="{{route('change_password_post')}}" method="POST">

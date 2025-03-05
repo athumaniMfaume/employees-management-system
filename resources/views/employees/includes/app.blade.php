@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>@yield('title','Employee Management | Admin & Dashboard ')</title>
+    <title>@yield('title','Employee | Dashboard ')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -29,7 +29,7 @@
     <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{asset('assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
-
+@stack('head')
 
 </head>
 
@@ -119,6 +119,7 @@
   
    {{-- scripts --}}
    @include('employees.includes.script')
+   @stack('scripts')
 
 </body>
 

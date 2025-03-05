@@ -1,83 +1,34 @@
-<!doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+@extends('admin.includes.app')
 
+@section('title')
+    Admin | Leave | View
+@endsection
 
-<!-- Mirrored from themesbrand.com/velzon/html/material/tables-listjs.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:05:08 GMT -->
-<head>
-
-    <meta charset="utf-8" />
-    <title>Admin | Show Leave </title>
-     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
-
+@push('head')
     <!-- Sweet Alert css-->
     <link href="{{asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+@endpush
 
-    <!-- Layout config Js -->
-    <script src="{{asset('assets/js/layout.js')}}"></script>
-    <!-- Bootstrap Css -->
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- custom Css-->
-    <link href="{{asset('assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+@push('scripts')
+ <!-- JAVASCRIPT -->
 
 
+    <!-- prismjs plugin -->
+    <script src="{{asset('assets/libs/prismjs/prism.js')}}"></script>
+    <script src="{{asset('assets/libs/list.js/list.min.js')}}"></script>
+    <script src="{{asset('assets/libs/list.pagination.js/list.pagination.min.js')}}"></script>
 
-</head>
+    <!-- listjs init -->
+    <script src="{{asset('assets/js/pages/listjs.init.js')}}"></script>
 
-<body>
+    <!-- Sweet Alerts js -->
+    <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 
-    <!-- Begin page -->
-    <div id="layout-wrapper">
-
-        @include('admin.includes.header')
+@endpush
 
 
-        <!-- ========== App Menu ========== -->
-              <!-- ========== App Menu ========== -->
-              <div class="app-menu navbar-menu">
-                <!-- LOGO -->
-                <div class="navbar-brand-box">
-                    <!-- Dark Logo-->
-                    <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
-                        <span class="logo-sm">
-                            <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="{{asset('assets/images/logo-dark.png')}}" alt="" height="17">
-                        </span>
-                    </a>
-                    <!-- Light Logo-->
-                    <a href="{{route('admin.dashboard')}}" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="17">
-                        </span>
-                    </a>
-                    <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
-                        <i class="ri-record-circle-line"></i>
-                    </button>
-                </div>
-    
-               {{-- sidebar --}}
-               @include('admin.includes.side')
-    
-                <div class="sidebar-background"></div>
-            </div>
-            <!-- Left Sidebar End -->
-            <!-- Vertical Overlay-->
-            <div class="vertical-overlay"></div>
-        <!-- Vertical Overlay-->
-      
+@section('content')
 
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
-        <div class="main-content">
 
             <div class="page-content">
                 <div class="container-fluid">
@@ -220,50 +171,4 @@
             </div>
             <!-- End Page-content -->
 
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Velzon.
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Themesbrand
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <!-- end main content-->
-
-    </div>
-    <!-- END layout-wrapper -->
-
-
-
-
-    <!-- JAVASCRIPT -->
-    <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
-    <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
-    <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
-    <script src="{{asset('assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{asset('assets/js/plugins.js')}}"></script>
-    <!-- prismjs plugin -->
-    <script src="{{asset('assets/libs/prismjs/prism.js')}}"></script>
-    <script src="{{asset('assets/libs/list.js/list.min.js')}}"></script>
-    <script src="{{asset('assets/libs/list.pagination.js/list.pagination.min.js')}}"></script>
-
-    <!-- listjs init -->
-    <script src="{{asset('assets/js/pages/listjs.init.js')}}"></script>
-
-    <!-- Sweet Alerts js -->
-    <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
-
-    <!-- App js -->
-    <script src="{{asset('assets/js/app.js')}}"></script>
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/material/tables-listjs.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:05:08 GMT -->
-</html>
+           @endsection

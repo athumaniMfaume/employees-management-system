@@ -1,7 +1,7 @@
 @extends('admin.includes.app')
 
 @section('title')
-    Admin | Approve Complaints
+    Admin | Complain | Approve 
 @endsection
 
 

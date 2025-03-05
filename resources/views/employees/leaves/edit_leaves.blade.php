@@ -1,7 +1,7 @@
 @extends('employees.includes.app')
 
 @section('title')
-    Employee | Edit Leaves
+    Employee | Leave | Edit
 @endsection
 
 

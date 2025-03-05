@@ -1,7 +1,7 @@
 @extends('admin.includes.app')
 
 @section('title')
-    Department | Add
+    Admin | Department | Add
 @endsection
 
 

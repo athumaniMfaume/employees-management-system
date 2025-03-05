@@ -1,7 +1,7 @@
 @extends('employees.includes.app')
 
 @section('title')
-    Employee | Edit Employee
+    Employee | Profile | Edit 
 @endsection
 
 
