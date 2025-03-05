@@ -1,129 +1,177 @@
-Employee Management System Documentation
+Employees Management System Documentation
 
-Table of Contents
+1. Project Title
 
-Introduction
-Features
-Installation and Setup
-System Requirements
-Configuration
-Database Migration
-Usage
-User Roles
-Admin Features
-Employee Features
-Leave Application and Complaints
-API Endpoints (Optional)
-Conclusion
+Employees Management System
 
-1. Introduction
-The Employee Management System is a Laravel-based application designed to streamline employee management for organizations. The system allows employers to manage employee information, approve leave applications, and handle complaints. The system is designed with an admin role to manage user permissions, approve requests, and maintain overall control of the system.
+2. Introduction
 
-2. Features
-Employee Registration: Admin can add new employees to the system.
-Leave Management: Employees can apply for leave, and admin can approve/reject requests.
-Complaint Management: Employees can submit complaints, and the admin can manage those complaints.
-Role Management: Different user roles (Admin, Employer) for varying levels of access.
-Dashboard: Admin dashboard for monitoring activities and user requests.
-Data Security: Secure authentication and authorization using Laravel’s built-in mechanisms.
+2.1 Overview
 
-3. Installation and Setup
-Step 1: Clone the Repository
-Clone the repository using Git:
-git clone https://github.com/your-repository/employee-management-system.git
-cd employee-management-system
+The Employees Management System is a web-based application built using Laravel. It helps organizations efficiently manage employees, track leave requests, monitor payroll, and organize departmental structures. This system simplifies HR processes and ensures seamless management of employee data.
 
-Step 2: Install Dependencies
-Run composer to install the necessary Laravel packages:
+2.2 Objectives
+
+Automate employee record management.
+
+Provide an easy-to-use interface for HR and employees.
+
+Track employee attendance, leave requests, and salary records.
+
+Improve overall efficiency and transparency in HR operations.
+
+3. System Features
+
+3.1 Functional Requirements
+
+✅ Employee registration and management✅ Department and job position assignment✅ Leave request and approval system✅ Payroll and salary management✅ Employee performance tracking✅ Role-based access control (Admin, HR, Employee)✅ Reporting and analytics dashboard✅ Data backup and recovery
+
+3.2 Non-Functional Requirements
+
+✅ Security (User authentication & data protection)✅ Scalability (Supports company growth)✅ Performance (Optimized database queries & caching)✅ Usability (User-friendly UI for HR and employees)✅ Reliability (Ensures data integrity & uptime)
+
+4. System Architecture
+
+4.1 Technology Stack
+
+Frontend: Blade Templates, HTML, CSS, JavaScript (Bootstrap)
+
+Backend: Laravel (PHP Framework)
+
+Database: MySQL
+
+Version Control: GitHub
+
+Deployment: DigitalOcean / AWS / Local Server
+
+4.2 System Design
+
+User Authentication: Laravel authentication system (Sanctum/Passport for APIs)
+
+Database Relationships: Employees, Departments, Leave Requests, Salaries, Users
+
+API Integration: To allow future scalability and third-party system integration
+
+5. Database Schema
+
+Table Name
+
+Description
+
+employees
+
+Stores employee details
+
+departments
+
+Stores department information
+
+positions
+
+Stores employee job positions
+
+salaries
+
+Stores employee salary details
+
+leave_requests
+
+Manages leave applications
+
+users
+
+Stores login credentials and roles
+
+Admin:
+
+Add, edit, delete employees
+Manage departments and positions
+Approve/reject leave requests
+Process payroll and salaries
+View reports and analytics
+
+
+Employee:
+
+View personal details
+Apply for leave
+Submit complaints
+Update profile
+
+6. User Roles and Permissions
+
+Admin
+
+Full access to manage system settings, users, and data
+
+HR Manager
+
+Manage employees, leave, and payroll
+
+Employee
+
+View profile, apply for leave
+
+7. Installation Guide
+
+7.1 Prerequisites
+
+PHP 8.x
+
+Composer
+
+MySQL Database
+
+Laravel 10.x
+
+Web server (Apache/Nginx)
+
+7.2 Steps to Install
+
+# Clone the repository
+git clone https://github.com/athumaniMfaume/employees-management-system.git
+cd employees-management
+
+# Install dependencies
 composer install
 
-Step 3: Set Up .env File
-Copy the .env.example file to .env and configure the database settings:
-
+# Copy environment file
 cp .env.example .env
-Then, set up your database credentials in the .env file.
 
-Step 4: Generate Application Key
-Run the following command to generate the app key:
-
+# Generate application key
 php artisan key:generate
-Step 5: Run Migrations
-Migrate the database to create all the necessary tables:
-php artisan migrate
 
-4. System Requirements
-PHP >= 7.4
-Composer
-MySQL or PostgreSQL (for database)
-Laravel 8 or higher
+# Run migrations
+php artisan migrate --seed
 
-5. Configuration
-Once the application is installed, configure the settings such as mail configurations, database settings, etc., in the .env file.
-
-6. Database Migration
-Run the following command to migrate the database schema:
-php artisan migrate
-This will create the required tables such as:
-
-users (store admin details)
-leave_requests (stores leave requests)
-complaints (stores complaints)
-employees (stores employee details)
-departments (stores department details)
-
-7. Usage
-
-1. Register New Employees:
-Navigate to the "Employees" section in the admin panel.
-Fill in the employee’s details like name, role, department, and contact info.
-Click "Save" to add the employee to the system.
-
-2. Leave Application:
-Employees can apply for leave via the "Leave Requests" section.
-After submission, the admin will review and approve or reject the leave request.
-
-3. Complaints:
-Employees can submit complaints, which will be stored in the complaints section.
-Admins can review and take necessary action on complaints.
-
-8. User Roles
-Admin:
-Full access to the system, including employee management, leave request approvals, and complaints management.
-Employer:
-Can apply for leave, submit complaints, and view personal information.
-
-9. Admin Features
-Employee Management:
-Add, edit, or delete employee records.
-Leave Requests:
-View, approve, or reject leave requests submitted by employees.
-Complaints Management:
-View and manage complaints submitted by employees.
-Role Management:
-Assign and manage roles for employees.
-
-10. Employee Features
-Profile Management:
-Employees can view and update their profile information.
-Leave Application:
-Submit leave requests and track leave status.
-Complaint Submission:
-Submit complaints and track their status.
-
-11. Leave Application and Complaints
-Leave Application Process:
-Employee fills in the leave application form.
-Admin reviews and either approves or rejects the request.
-The employee is notified about the status of the leave.
-Complaint Process:
-Employee fills in the complaint form.
-Admin reviews the complaint and decides the action to take.
-Employee is notified of the decision.
-
+# Start the application
+php artisan serve
 
 🔐 Default Login Credentials
 Role	Email	Password
 Admin	admin@gmail.com	password 123
+
+8. Usage Guide
+
+Admin Dashboard → Manage employees, departments, payroll, and reports
+
+HR Dashboard → Approve leave requests, manage salaries, update records
+
+Employee Dashboard → View profile, apply for leave, check payroll status
+
+9. Backup and Recovery Plan
+
+Daily database backups using Laravel Scheduler
+
+Backups stored in cloud storage (AWS S3, Google Drive, etc.)
+
+Backup restoration through admin panel
+
+10. Conclusion
+
+The Employees Management System streamlines HR operations by providing an efficient, secure, and user-friendly solution for managing employees, payroll, and leave requests. It ensures transparency, reduces paperwork, and enhances organizational efficiency.
+
+
 
 
 

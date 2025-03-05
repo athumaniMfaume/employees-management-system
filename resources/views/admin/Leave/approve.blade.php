@@ -95,18 +95,6 @@
                                     <p class="text-danger">{{$message}}</p>
                                  @enderror
                                 </div>
-
-                                <div class="col-xxl-3 col-md-6">
-                                    <div>
-                                        <label for="labelInput" class="form-label">Reason</label>
-                                        <textarea name="reason" id="" cols="30" rows="10" class="form-control">{{$datas->reason}}</textarea>
-                                       
-                                    </div>
-                                    @error('reason')
-                                    <p class="text-danger">{{$message}}</p>
-                                 @enderror
-                                </div>
-
                                    <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Status</label>
@@ -130,6 +118,19 @@
                                            <p class="text-danger">{{$message}}</p>
                                         @enderror
                                 </div>
+
+                                <div class="col-xxl-3 col-md-6">
+                                    <div>
+                                        <label for="labelInput" class="form-label">Reason</label>
+                                        <textarea name="reason" id="" cols="30" rows="10" class="form-control">{{$datas->reason}}</textarea>
+                                       
+                                    </div>
+                                    @error('reason')
+                                    <p class="text-danger">{{$message}}</p>
+                                 @enderror
+                                </div>
+
+                                
                                 
 
                                

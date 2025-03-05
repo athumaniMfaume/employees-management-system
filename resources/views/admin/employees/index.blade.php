@@ -85,7 +85,7 @@
                                                         <th> S/N </th>
                                                         <th class="sort" data-sort="customer_name">Image</th>
                                                         <th class="sort" data-sort="customer_name">Name</th>
-                                                         <th class="sort" data-sort="customer_name">Gender</th>
+                                                         <th class="sort" data-sort="customer_name">Sex</th>
                                                         <th class="sort" data-sort="email">Department</th>
                                                         <th class="sort" data-sort="email">Position</th>
                                                         <th class="sort" data-sort="phone">Email</th>
