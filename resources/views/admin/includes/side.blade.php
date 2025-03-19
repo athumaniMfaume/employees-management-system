@@ -5,7 +5,7 @@
                     </div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                           <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                <i class="mdi mdi-account-group"></i> <span data-key="t-dashboards">Employees</span>
                             </a>
@@ -47,44 +47,39 @@
                         </li>
 
 
-
-                                                   <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('complain.show')}}">
                                 <i class="mdi mdi-message-alert-outline"></i> <span data-key="t-widgets">Complain</span>
                             </a>
                         </li>
 
-                            <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('leave.show')}}">
                                 <i class="mdi mdi-calendar-check"></i></i> <span data-key="t-widgets">Leave</span>
                             </a>
                         </li>
 
-                                 <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('admin.profile')}}">
                                 <i class="mdi mdi-account-circle"></i>
                                   <span data-key="t-widgets">Profile</span>
                             </a>
                         </li>
 
-                                 <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('change_password') }}">
                                 <i class="mdi mdi-lock-reset"></i> <span data-key="t-widgets">Change Password</span>
                             </a>
                         </li>
 
-                                                <li class="nav-item">
-    <a class="nav-link menu-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="mdi mdi-logout"></i> <span data-key="t-widgets">Logout</span>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</li>
-
-
-                      
-                       
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                             <i class="mdi mdi-logout"></i> <span data-key="t-widgets">Logout</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                           </form>
+                        </li>
 
                     </ul>
                 </div>

@@ -72,9 +72,6 @@
                                         @enderror
                                 </div>
 
-                                 <!--end col-->
-                               
-                             
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="valueInput" class="form-label">Start Date</label>
@@ -106,10 +103,6 @@
                                              <option value="rejected" {{$datas->status=='rejected' ? 'selected' :'' }}>Rejected</option>
 
                                               <option value="resolved" {{$datas->status=='resolved' ? 'selected' :'' }}>Resolved</option>
-
-                                            
-                                            
-
                                               
                                         </select>
                                         
@@ -130,16 +123,20 @@
                                  @enderror
                                 </div>
 
-                                
-                                
-
-                               
+                                <div class="col-xxl-3 col-md-6">
+                                    <div>
+                                        <label for="labelInput" class="form-label">Remark</label>
+                                        <textarea name="remarks" id="" cols="100" rows="10" class="form-control">{{$datas->remarks == $datas->remarks ? $datas->remarks : '' }}</textarea>
+                                       
+                                    </div>
+                                    @error('remarks')
+                                    <p class="text-danger">{{$message}}</p>
+                                 @enderror
+                                </div>
+                         
                                 <center>
                                     <button type="submit" class="btn btn-primary"> Submit</button>
                                 </center>
-
-                           
-
 
                         </div>
                     </form>
@@ -150,13 +147,6 @@
             <!--end col-->
         </div>
         <!--end row-->
-
-
-
-
-   
-
-
 
     </div> <!-- container-fluid -->
 </div>

@@ -21,21 +21,21 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     protected $employeeService;
-     protected $userService;
-     protected $approveComplainService;
-       protected $approveLeaveService;
+    protected $userService;
+    protected $approveComplainService;
+    protected $approveLeaveService;
 
-public function __construct(
-    ApproveLeaveService $approveLeaveService,  // Updated this line
-    ApproveComplainService $approveComplainService, 
-    EmployeeService $employeeService, 
-    UserService $userService
-) {
-    $this->approveLeaveService = $approveLeaveService; // Correct variable name
-    $this->approveComplainService = $approveComplainService;
-    $this->employeeService = $employeeService;
-    $this->userService = $userService;
-}
+    public function __construct(
+      ApproveLeaveService $approveLeaveService,  // Updated this line
+      ApproveComplainService $approveComplainService, 
+      EmployeeService $employeeService, 
+      UserService $userService
+    ) {
+       $this->approveLeaveService = $approveLeaveService; // Correct variable name
+       $this->approveComplainService = $approveComplainService;
+       $this->employeeService = $employeeService;
+       $this->userService = $userService;
+    }
 
     public function dashboard()
     {

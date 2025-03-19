@@ -29,7 +29,6 @@
 
 @section('content')
 
-
             <div class="page-content">
                 <div class="container-fluid">
 
@@ -95,7 +94,7 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$data->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td class="customer_name" >{{$data->subject}}</td>
                                                         <td class="customer_name" >{{\Illuminate\Support\Str::words($data->content,7,'...')}}</td>
                                                         
@@ -157,11 +156,6 @@
                         </div>
                         <!-- end col -->
                     </div>
-                    <!-- end row -->
-
-                  
-
-
                 </div>
                 <!-- container-fluid -->
             </div>

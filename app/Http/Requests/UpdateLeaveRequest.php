@@ -22,10 +22,11 @@ class UpdateLeaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
-            'reason' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
-            'start_date' => 'sometimes|required|date',
-            'end_date' => 'sometimes|date|after_or_equal:start_date',
+'type' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'reason' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'start_date' => 'sometimes|date',
+'end_date' => 'sometimes|date|after_or_equal:start_date',
+
         ];
     }
 }

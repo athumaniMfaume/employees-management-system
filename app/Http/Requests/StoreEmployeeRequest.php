@@ -23,12 +23,12 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
-            'gender' => 'nullable|in:male,female,other',
+            'gender' => 'required|in:male,female,other',
             'department_id' => 'required',
             'position' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
             'email' => 'required|email|unique:employees,email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
             'phone' => 'required|regex:/^\+255[0-9]{9}$/',
-            'image' => 'sometimes|mimes:jpg,jpeg,png,gif|max:10000',
+            'image' => 'required|mimes:jpg,jpeg,png,gif|max:10000',
             'dob' => 'required|date|before:' . now()->subYears(18)->toDateString(),
             'salary' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
         ];

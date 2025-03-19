@@ -17,8 +17,10 @@ class ApproveLeaveService
         $leave->start_date = $data['start_date'];
         $leave->end_date = $data['end_date'];
         $leave->status = $data['status'];
+        $leave->remarks = $data['remarks'];
 
         // Save changes and return success or failure
+    
         return $leave->save();
     }
 }

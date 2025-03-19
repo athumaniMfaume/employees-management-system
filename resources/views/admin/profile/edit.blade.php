@@ -59,9 +59,6 @@
                                 </div>
                                 <!--end col-->
 
-
-
-
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="labelInput" class="form-label">Email</label>
@@ -82,9 +79,6 @@
                                     <button type="submit" class="btn btn-primary"> Submit</button>
                                 </center>
 
-                           
-
-
                         </div>
                     </form>
                     </div>
@@ -93,15 +87,7 @@
             </div>
             <!--end col-->
         </div>
-        <!--end row-->
-
-
-
-
-   
-
-
-
+      
     </div> <!-- container-fluid -->
 </div>
 @endsection

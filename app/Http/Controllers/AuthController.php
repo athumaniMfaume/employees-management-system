@@ -15,53 +15,52 @@ class AuthController extends Controller
     {
         return view('auth.change_password');
     }
-public function change_password_post(Request $request)
-{
-    // Validate the new password
-    $validator = Validator::make($request->all(), [
-        'current_password' => 'required',
-        'new_password' => 'required|confirmed',
-        'new_password_confirmation' => 'required',
-    ]);
 
-    if ($validator->fails()) {
-        return redirect()->route('change_password')
+    public function change_password_post(Request $request)
+    {
+        // Validate the new password
+        $validator = Validator::make($request->all(), [
+          'current_password' => 'required',
+          'new_password' => 'required|confirmed',
+          'new_password_confirmation' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+          return redirect()->route('change_password')
             ->withErrors($validator)
             ->withInput();
-    }
+        }
 
-    // Determine which guard the user is logged into (employee or user)
-    if (Auth::guard('employee')->check()) {
-        // Employee is logged in
-        $authUser = Auth::guard('employee')->user();
-    } elseif (Auth::guard('web')->check()) {
-        // User (admin) is logged in
-        $authUser = Auth::guard('web')->user();
-    } else {
-        // If neither is authenticated
-        return redirect()->route('login')->with('error', 'You need to be logged in to change your password.');
-    }
+        // Determine which guard the user is logged into (employee or user)
+        if (Auth::guard('employee')->check()) {
+           // Employee is logged in
+           $authUser = Auth::guard('employee')->user();
+           } elseif (Auth::guard('web')->check()) {
+              // User (admin) is logged in
+              $authUser = Auth::guard('web')->user();
+           } else {
+             // If neither is authenticated
+             return redirect()->route('login')->with('error', 'You need to be logged in to change your password.');
+             }
 
-    // Check if the current password matches the stored password for the correct user
-    if (!Hash::check($request->current_password, $authUser->password)) {
-        return redirect()->route('change_password')
+           // Check if the current password matches the stored password for the correct user
+           if (!Hash::check($request->current_password, $authUser->password)) {
+             return redirect()->route('change_password')
             ->with('error', 'The current password is incorrect.');
+            }
+
+           // Update the password
+           $authUser->update([
+           'password' => Hash::make($request->new_password),
+           ]);
+
+           // Log the user out after password change, to prevent session conflicts
+           Auth::guard($authUser instanceof \App\Models\User ? 'web' : 'employee')->logout();
+
+           // Redirect user to the login page with success message
+           return redirect()->route('login')
+           ->with('success', 'Password changed successfully. Please log in again.');
     }
-
-    // Update the password
-    $authUser->update([
-        'password' => Hash::make($request->new_password),
-    ]);
-
-    // Log the user out after password change, to prevent session conflicts
-    Auth::guard($authUser instanceof \App\Models\User ? 'web' : 'employee')->logout();
-
-    // Redirect user to the login page with success message
-    return redirect()->route('login')
-        ->with('success', 'Password changed successfully. Please log in again.');
-}
-
-
 
 
 
@@ -129,50 +128,6 @@ public function change_password_post(Request $request)
     }
 
     return redirect()->back()->with('error', 'Email or password is incorrect.');
-}
-
-    /**
-     * Show the form for creating a new resource.
-     */
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

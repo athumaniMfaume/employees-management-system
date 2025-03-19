@@ -12,6 +12,7 @@ class ApproveComplainService
         $complain->subject = $data['subject'];
         $complain->content = $data['content'];
         $complain->status = $data['status'];
+        $complain->remarks = $data['remarks'];
 
         return $complain->update();
     }

@@ -62,9 +62,7 @@
                                     <p class="text-danger">{{$message}}</p>
                                  @enderror
                                 </div>
-                                
-
-
+                            
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="labelInput" class="form-label">Content</label>
@@ -76,14 +74,9 @@
                                  @enderror
                                 </div>
                                 
-
-                               
                                 <center>
                                     <button type="submit" class="btn btn-primary"> Submit</button>
                                 </center>
-
-                           
-
 
                         </div>
                     </form>
@@ -93,15 +86,7 @@
             </div>
             <!--end col-->
         </div>
-        <!--end row-->
-
-
-
-
-   
-
-
-
+        
     </div> <!-- container-fluid -->
 </div>
 @endsection

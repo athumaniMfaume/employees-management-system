@@ -85,7 +85,7 @@
                                                         <th> S/N </th>
                                                         <th class="sort" data-sort="customer_name">Image</th>
                                                         <th class="sort" data-sort="customer_name">Name</th>
-                                                         <th class="sort" data-sort="customer_name">Sex</th>
+                                                         <th >Sex</th>
                                                         <th class="sort" data-sort="email">Department</th>
                                                         <th class="sort" data-sort="email">Position</th>
                                                         <th class="sort" data-sort="phone">Email</th>
@@ -101,7 +101,7 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$data->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td><img height="70" width="120" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
                                                           <td class="customer_name" >{{ $data->name}}</td>
                                                         <td class="customer_name" >{{ $data->gender ?? ' ' }}</td>
@@ -155,10 +155,6 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                  
-
-
                 </div>
                 <!-- container-fluid -->
             </div>

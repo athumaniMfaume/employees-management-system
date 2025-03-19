@@ -7,8 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreComplainRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     */
+     * Determine if the user is authorized|regex:/^[a-zA-Z0-9\s]+$/|max:255
     public function authorize(): bool
     {
         return true;
@@ -22,8 +21,9 @@ class StoreComplainRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:255',
-            'content' => 'required|regex:/^[a-zA-Z0-9\s]+$/|max:255',
+'subject' => 'required|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'content' => 'required|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+
         ];
     }
 }

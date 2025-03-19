@@ -29,10 +29,6 @@
 
 @section('content')
 
-
-
-
-
             <div class="page-content">
                 <div class="container-fluid">
 
@@ -89,7 +85,9 @@
                                                         <th class="sort" data-sort="customer_name" > S/N </th>
                                                          <th class="sort" data-sort="customer_name">Subject</th>
                                                         <th class="sort" data-sort="customer_name">Content</th>
+                                                        <th class="sort" data-sort="customer_name">Remark</th>
                                                         <th class="sort" data-sort="customer_name">Status</th>
+                                                         
                                                         <th class="sort" data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
@@ -98,9 +96,11 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$data->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td class="customer_name" >{{$data->subject}}</td>
                                                         <td class="customer_name" >{{\Illuminate\Support\Str::words($data->content,7,'...')}}</td>
+
+                                                        <td class="customer_name" >{{\Illuminate\Support\Str::words($data->remarks,7,'...' ?? '')}}</td>
                                                         
                                                         <td >	@if($data->status == 'pending')
 
@@ -116,6 +116,8 @@
                                                            	<button type="button" class="btn btn-success btn-label waves-effect waves-light"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> {{ucfirst($data->status)}}</button>
 
                                                            	@endif</td>
+
+                                                        
                                                         
                                                         <td>
                                                            <a href="{{ route('complain.approve', $data->id) }}" class="btn btn-warning btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>Edit</a>
@@ -159,9 +161,6 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                  
-
 
                 </div>
                 <!-- container-fluid -->

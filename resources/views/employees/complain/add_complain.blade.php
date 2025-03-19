@@ -81,9 +81,6 @@
                                     <button type="submit" class="btn btn-primary"> Submit</button>
                                 </center>
 
-                           
-
-
                         </div>
                     </form>
                     </div>
@@ -92,15 +89,7 @@
             </div>
             <!--end col-->
         </div>
-        <!--end row-->
-
-
-
-
-   
-
-
-
+     
     </div> <!-- container-fluid -->
 </div>
 @endsection

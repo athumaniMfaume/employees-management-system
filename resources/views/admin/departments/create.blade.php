@@ -58,15 +58,10 @@
                                     @error('name')
                                            <p class="text-danger">{{$message}}</p>
                                         @enderror
-                                </div><br>
-                              
-
+                                </div><br>                              
                                
                                     <button type="submit" class="btn btn-primary"> Submit</button>
                                 </center>
-
-                           
-
 
                         </div>
                     </form>
@@ -77,13 +72,6 @@
             <!--end col-->
         </div>
         <!--end row-->
-
-
-
-
-   
-
-
 
     </div> <!-- container-fluid -->
 </div>

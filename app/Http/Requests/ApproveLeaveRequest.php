@@ -22,11 +22,13 @@ class ApproveLeaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
-            'reason' => 'sometimes|regex:/^[a-zA-Z0-9\s]+$/|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'status' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+'type' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'reason' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'start_date' => 'sometimes|date',
+'end_date' => 'sometimes|date|after_or_equal:start_date',
+'status' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+'remarks' => 'sometimes|regex:/^[a-zA-Z][a-zA-Z0-9\s&\'-]*$/|max:255',
+
         ];
     }
 }

@@ -51,37 +51,30 @@
 
                                               
 
-                                 <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('employees.profile')}}">
                                 <i class="mdi mdi-account-circle"></i>
                                   <span data-key="t-widgets">Profile</span>
                             </a>
                         </li>
 
-                                 <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('change_password') }}">
                                 <i class="mdi mdi-lock-reset"></i> <span data-key="t-widgets">Change Password</span>
                             </a>
                         </li>
 
-                                                <li class="nav-item">
-    <a class="nav-link menu-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="mdi mdi-logout"></i> <span data-key="t-widgets">Logout</span>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="mdi mdi-logout"></i> <span data-key="t-widgets">Logout</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                            </form>
+                            </li>
 
-
-                      
-                       
-
-
-                      
-
-                    </ul>
-                </div>
-                <!-- Sidebar -->
+                </ul>
             </div>
+                <!-- Sidebar -->
+        </div>
    

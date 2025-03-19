@@ -29,10 +29,6 @@
 
 @section('content')
 
-
-
-
-
             <div class="page-content">
                 <div class="container-fluid">
 
@@ -101,7 +97,7 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$data->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td class="customer_name" >{{$data->type}}</td>
                                                         <td class="customer_name" >{{$data->reason}}</td>
                                                         <td class="customer_name" >{{$data->start_date}}</td>
@@ -164,11 +160,7 @@
                         </div>
                         <!-- end col -->
                     </div>
-                    <!-- end row -->
-
-                  
-
-
+                   
                 </div>
                 <!-- container-fluid -->
             </div>

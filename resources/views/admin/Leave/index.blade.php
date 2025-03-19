@@ -88,6 +88,7 @@
                                                         <th class="sort" data-sort="customer_name">Reason</th>
                                                         <th class="sort" data-sort="customer_name">Start Date</th>
                                                         <th class="sort" data-sort="customer_name">End Date</th>
+                                                        <th class="sort" data-sort="customer_name">Remarks</th>
                                                         <th class="sort" data-sort="customer_name">Status</th>
                                                         
                                                         <th class="sort" data-sort="action">Action</th>
@@ -98,11 +99,12 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$data->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td class="customer_name" >{{$data->type}}</td>
                                                         <td class="customer_name" >{{$data->reason}}</td>
                                                         <td class="customer_name" >{{$data->start_date}}</td>
                                                         <td class="customer_name" >{{$data->end_date}}</td>
+                                                        <td class="customer_name" >{{\Illuminate\Support\Str::words($data->remarks,7,'...' ?? '')}}</td>
                                                          <td >  @if($data->status == 'pending')
 
                                                            
@@ -162,10 +164,6 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                  
-
-
                 </div>
                 <!-- container-fluid -->
             </div>

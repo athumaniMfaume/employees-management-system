@@ -95,7 +95,7 @@
                                             
                                         
                                                     <tr>
-                                                        <th>{{$department->id}}</th>
+                                                        <th>{{$loop->iteration}}</th>
                                                         <td class="customer_name" >{{$department->name}}</td>
                                                         
                                                         <td>
@@ -140,10 +140,6 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                  
-
-
                 </div>
                 <!-- container-fluid -->
             </div>

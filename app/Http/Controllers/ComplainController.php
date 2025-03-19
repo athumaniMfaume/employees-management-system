@@ -9,7 +9,7 @@ use App\Services\ComplainService;
 class ComplainController extends Controller
 {
 
-        protected $complainService;
+    protected $complainService;
 
     // Inject the service class
     public function __construct(ComplainService $complainService)
@@ -19,7 +19,7 @@ class ComplainController extends Controller
 
 
 
-      public function view()
+    public function view()
     {
         $datas = $this->complainService->getAllComplains();
         return view('employees.complain.view_complain', compact('datas'));

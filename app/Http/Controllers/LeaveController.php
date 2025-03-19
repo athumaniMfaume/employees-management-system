@@ -85,11 +85,6 @@ class LeaveController extends Controller
         }
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($leave)
     {
         $leave = Leave::findOrFail($leave);
