@@ -16,7 +16,7 @@ Automate employee record management.
 
 Provide an easy-to-use interface for HR and employees.
 
-Track employee attendance, leave requests, and salary records.
+Track employee leave and complaints requests
 
 Improve overall efficiency and transparency in HR operations.
 
@@ -24,11 +24,22 @@ Improve overall efficiency and transparency in HR operations.
 
 3.1 Functional Requirements
 
-✅ Employee registration and management✅ Department and job position assignment✅ Leave request and approval system✅ Payroll and salary management✅ Employee performance tracking✅ Role-based access control (Admin, HR, Employee)✅ Reporting and analytics dashboard✅ Data backup and recovery
+✅ Employee registration and management
+✅ Department and job position assignment
+✅ Leave request and approval system
+✅ Employee performance tracking
+✅ Role-based access control (Admin, Employee)
+✅ Reporting and analytics dashboard
+✅ Data backup and recovery
+✅ Email notifications: When an admin registers a new employee, an email notification is automatically sent to the employee with their login credentials (email and password) to access the system.
 
 3.2 Non-Functional Requirements
 
-✅ Security (User authentication & data protection)✅ Scalability (Supports company growth)✅ Performance (Optimized database queries & caching)✅ Usability (User-friendly UI for HR and employees)✅ Reliability (Ensures data integrity & uptime)
+✅ Security (User authentication & data protection)
+✅ Scalability (Supports company growth)
+✅ Performance (Optimized database queries & caching)
+✅ Usability (User-friendly UI for HR and employees)
+✅ Reliability (Ensures data integrity & uptime)
 
 4. System Architecture
 
@@ -46,49 +57,25 @@ Deployment: DigitalOcean / AWS / Local Server
 
 4.2 System Design
 
-User Authentication: Laravel authentication system (Sanctum/Passport for APIs)
+User Authentication: Laravel authentication system 
 
-Database Relationships: Employees, Departments, Leave Requests, Salaries, Users
+Database Relationships: Employees, Departments, Leave Requests, Users
 
-API Integration: To allow future scalability and third-party system integration
 
 5. Database Schema
 
-Table Name
-
-Description
-
-employees
-
-Stores employee details
-
-departments
-
-Stores department information
-
-positions
-
-Stores employee job positions
-
-salaries
-
-Stores employee salary details
-
-leave_requests
-
-Manages leave applications
-
-users
-
-Stores login credentials and roles
+Table Name  	Description
+employees	    Stores employee details
+departments	    Stores department information
+leaves       	Manages leave applications
+complains       Managesleave complain applications
+users	        Stores admin  login credentials and roles
 
 Admin:
 
 Add, edit, delete employees
 Manage departments and positions
 Approve/reject leave requests
-Process payroll and salaries
-View reports and analytics
 
 
 Employee:
@@ -104,13 +91,13 @@ Admin
 
 Full access to manage system settings, users, and data
 
-HR Manager
+Admin
 
-Manage employees, leave, and payroll
+Manage employees, leave and complaints
 
 Employee
 
-View profile, apply for leave
+Apply for leave and com
 
 7. Installation Guide
 
@@ -122,7 +109,7 @@ Composer
 
 MySQL Database
 
-Laravel 10.x
+Laravel 11.x
 
 Web server (Apache/Nginx)
 
@@ -153,11 +140,11 @@ Admin	admin@gmail.com	password 123
 
 8. Usage Guide
 
-Admin Dashboard → Manage employees, departments, payroll, and reports
+Admin Dashboard → Manage employees, departments, complain and leave  
+                  requests.
 
-HR Dashboard → Approve leave requests, manage salaries, update records
 
-Employee Dashboard → View profile, apply for leave, check payroll status
+Employee Dashboard → View profile, apply for leave and complaints
 
 9. Backup and Recovery Plan
 
@@ -170,6 +157,7 @@ Backup restoration through admin panel
 10. Conclusion
 
 The Employees Management System streamlines HR operations by providing an efficient, secure, and user-friendly solution for managing employees, payroll, and leave requests. It ensures transparency, reduces paperwork, and enhances organizational efficiency.
+
 
 
 
