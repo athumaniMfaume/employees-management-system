@@ -63,6 +63,9 @@
                                     @if (Session::has('success'))
                                     <div class="alert alert-success"> {{Session::get('success')}} </div>
                                 @endif
+
+
+
                                     <div class="listjs-table" id="customerList">
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
@@ -79,6 +82,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                    @if($departments->isEmpty())
+                                      <center> <h1>No data available!</h1></center> 
+
+                                      @else
 
                                         <div class="table-responsive table-card mt-3 mb-1">
                                             <table class="table align-middle table-nowrap" id="customerTable">
@@ -91,6 +99,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
+                                                     
                                                     @foreach ($departments as $department)
                                             
                                         
@@ -109,6 +118,8 @@
                                                         </td>
                                                     </tr>
                                                     @endforeach
+                                                     @endif
+                                                    
                                                 </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
