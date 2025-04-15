@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -21,9 +22,14 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
-            'email' => 'sometimes|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
-        ];
+    return [
+        'name' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
+        'email' => [
+            'sometimes',
+            'email',
+            'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
+            Rule::unique('users', 'email')->ignore($this->route('user')), 
+        ],
+    ];
     }
 }
