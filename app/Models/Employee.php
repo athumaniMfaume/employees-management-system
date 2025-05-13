@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable; // Use this instead of Model
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 
 class Employee extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
 
     protected $fillable = [
@@ -20,6 +21,11 @@ class Employee extends Authenticatable
         protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function salaries()
+{
+    return $this->hasOne(Salary::class,'employee_id');
+}
 
     public function departments(){
         

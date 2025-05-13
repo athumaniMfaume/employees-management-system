@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class employee
+class GuardTokenMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,15 @@ class employee
      */
     public function handle(Request $request, Closure $next): Response
     {
-if (Auth::guard('employee')->check() || Auth::guard('employee-api')->check()) {
-    return $next($request);
-}
+        // Try user guard
+        if (Auth::guard('api')->check()) {
+            Auth::shouldUse('api');
+        }
 
-    return redirect()->route('login')->with('error', 'Unauthorized User, Login to Continue!!');
-    }
-    
+        // Try employee guard
+        elseif (Auth::guard('employee_api')->check()) {
+            Auth::shouldUse('employee_api');
+        }
+
+        return $next($request);    }
 }

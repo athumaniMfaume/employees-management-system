@@ -45,6 +45,17 @@ return [
             'driver' => 'session',
             'provider' => 'employees',
         ],
+
+            // 👇 Add this new guard for token-based login for employees
+    'employee_api' => [
+        'driver' => 'sanctum',
+        'provider' => 'employees',
+    ],
+
+        'api' => [
+        'driver' => 'sanctum',
+        'provider' => 'users',
+        ],
     ],
 
     /*

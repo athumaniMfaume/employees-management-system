@@ -19,11 +19,17 @@ class ComplainService
 
     public function updateComplain($data, $complainId)
     {
-        $complain = Complain::findOrFail($complainId);
-        $complain->subject = $data['subject'];
-        $complain->content = $data['content'];
+    $complain = Complain::findOrFail($complainId);
 
-        return $complain->update();
+    if (isset($data['subject'])) {
+        $complain->subject = $data['subject'];
+    }
+
+    if (isset($data['content'])) {
+        $complain->content = $data['content'];
+    }
+
+    return $complain->update();
     }
 
     public function deleteComplain($complainId)

@@ -37,6 +37,12 @@
                             <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text">Employees</span>                        </a>
                         </div>
 
+                                              <div class="dropdown ms-1 topbar-head-dropdown header-item">
+
+      <a href="{{ route('salaries.index') }}" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
+                            <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text">Salary</span>                        </a>
+                        </div>
+
                                  <div class="dropdown ms-1 topbar-head-dropdown header-item">
 
       <a href="{{ route('departments.index') }}" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
@@ -55,26 +61,10 @@
                             <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text ">Complain</span>                        </a>
                         </div>
 
-                                                  <div class="dropdown ms-1 topbar-head-dropdown header-item">
-
-      <a href="{{ route('admin.profile') }}" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
-                            <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text">Profile</span>                        </a>
-                        </div>
+                                                  
                
-                        <div class="dropdown ms-1 topbar-head-dropdown header-item">
+      
 
-      <a href="{{ route('change_password') }}" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
-                            <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text ">Change Password</span>                        </a>
-                        </div>
-
-                   <div class="dropdown ms-1 topbar-head-dropdown header-item">
-    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-        @csrf
-        <button type="submit" class="dropdown-item notify-item language py-2" data-lang="en" title="Logout">
-            <span class="d-none d-xl-inline-block ms-5 fw-medium user-name-text">Logout</span>
-        </button>
-    </form>
-</div>
 
             </div>
 

@@ -1,17 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\ComplainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 
 
+Route::fallback(function () {
+    return view('404');
+});
 
 
+ Route::get('/employee/salary/{id}/pdf', [SalaryController::class, 'generatePDF'])->name('employee.salary.pdf');
 Route::group(['middleware' => 'employee'], function () {
+
+    Route::get('/my-salary', [SalaryController::class, 'mySalary'])->name('mySalary');
     Route::get('/employees/dashboard', [EmployeeController::class, 'employees_dashboard'])->name('employees.dashboard');
     Route::get('/employees/profile', [EmployeeController::class, 'employees_profile'])->name('employees.profile');
     Route::get('/employees/profile/{employee}/edit', [EmployeeController::class, 'employees_profile_edit'])->name('employees.profile.edit');
@@ -37,6 +45,21 @@ Route::group(['middleware' => 'employee'], function () {
 });
 
 Route::group(['middleware' => 'user'], function () {
+    Route::get('/admin/departments/pdf', [PdfController::class, 'department_pdf'])->name('admin.department.pdf');
+    Route::get('/admin/employees/pdf', [PdfController::class, 'employee_pdf'])->name('admin.employee.all.pdf');
+    Route::get('/admin/employees/{id}/pdf', [PdfController::class, 'single_employee_pdf'])->name('admin.single.employee.all.pdf');
+    Route::get('/admin/salary/pdf', [SalaryController::class, 'allSalaryPDF'])->name('admin.salary.pdf');
+
+    // Payroll routes
+Route::get('/admin/salaries', [SalaryController::class, 'index'])->name('salaries.index');
+Route::get('/admin/salaries/create', [SalaryController::class, 'create'])->name('salaries.create');
+Route::post('/admin/salaries', [SalaryController::class, 'store'])->name('salaries.store');
+
+Route::get('/admin/salaries/{id}', [SalaryController::class, 'show'])->name('salaries.show');
+Route::get('/admin/salaries/{id}/edit', [SalaryController::class, 'edit'])->name('salaries.edit');
+Route::put('/admin/salaries/{id}', [SalaryController::class, 'update'])->name('salaries.update');
+Route::delete('/admin/salaries/{id}', [SalaryController::class, 'destroy'])->name('salaries.destroy');
+
 
     Route::get('/admin/profile', [AdminController::class, 'admin_profile'])->name('admin.profile');
 

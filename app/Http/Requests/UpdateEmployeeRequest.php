@@ -29,7 +29,7 @@ class UpdateEmployeeRequest extends FormRequest
         'department_id' => 'sometimes',
         'position' => 'sometimes|regex:/^[a-zA-Z\s]+$/|max:255',
         'email' => [
-            'required',
+            'sometimes',
             'email',
             'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{2,}\.[a-zA-Z]{2,}$/',
             Rule::unique('employees', 'email')->ignore($this->employee->id),  // Use employee instance passed from the controller

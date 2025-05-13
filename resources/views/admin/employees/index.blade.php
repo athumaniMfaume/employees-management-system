@@ -68,6 +68,7 @@
                                             <div class="col-sm-auto">
                                                 <div>
                                                     <a href="{{route('employees.create')}}" class="btn btn-primary">Add Employee</a>
+                                                    <a href="{{route('admin.employee.all.pdf')}}" class="btn btn-secondary">Print</a>
                                                 </div>
                                             </div>
                                             <div class="col-sm">
@@ -109,7 +110,7 @@
                                         
                                                     <tr>
                                                         <th>{{$loop->iteration}}</th>
-                                                        <td><img height="70" width="120" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
+                                                        <td><img height="70%" width="90%" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
                                                           <td class="customer_name" >{{ $data->name}}</td>
                                                         <td class="customer_name" >{{ $data->gender ?? ' ' }}</td>
                                                         <td class="date">{{$data->departments->name}}</td>
@@ -127,7 +128,8 @@
                                                             @method('DELETE')
                                                             
                                                             <button type="submit" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>                                            </form>
-            
+                                                            <a href="{{ route('admin.single.employee.all.pdf', $data->id) }}" class="btn btn-secondary btn-icon waves-effect waves-light"><i class="ri-print-bin-5-line"></i>print</a>
+
                                                         </td>
                                                     </tr>
                                                     @endforeach

@@ -46,6 +46,29 @@
                             </div>
                         </li>
 
+                                                <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarU" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarU">
+                                <i class="mdi mdi-cash-multiple"></i> <span data-key="t-base-ui">Salaries</span>
+                            </a>
+                            <div class="collapse menu-dropdown mega-dropdown-menu" id="sidebarU">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{{route('salaries.create')}}" class="nav-link" data-key="t-alerts">Add</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{route('salaries.index')}}" class="nav-link" data-key="t-badges">View</a>
+                                            </li>
+                                         
+                                          
+                                        </ul>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </li>
+
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('complain.show')}}">

@@ -38,33 +38,35 @@ class EmployeeService
         return $employee;
     }
 
-    public function updateEmployee($data, Employee $employee)
-    {
-        // Handle image update
-        if (isset($data['image'])) {
-            $image = $data['image'];
+public function updateEmployee($data, Employee $employee)
+{
+    // Handle image update
+    if (isset($data['image'])) {
+        $image = $data['image'];
 
-            if ($image->isValid()) {
-                // Delete old image
-                if ($employee->image && file_exists(public_path('images/' . $employee->image))) {
-                    unlink(public_path('images/' . $employee->image));
-                }
-
-                // Save new image
-                $imagename = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images'), $imagename);
-                $data['image'] = $imagename;
-            } else {
-                return 'Invalid image file.';
+        if ($image->isValid()) {
+            // Delete old image
+            if ($employee->image && file_exists(public_path('images/' . $employee->image))) {
+                unlink(public_path('images/' . $employee->image));
             }
-        }
 
-        if ($employee->update($data)) {
-            return 'Employee updated successfully.';
+            // Save new image
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imagename);
+            $data['image'] = $imagename;
         } else {
-            return 'Failed to update employee.';
+            return 'Invalid image file.';
         }
     }
+
+    if ($employee->update($data)) {
+        // ✅ Return updated model instance
+        return $employee->fresh(); // Refresh and return updated data
+    }
+
+    return 'Failed to update employee.';
+}
+
 
     public function deleteEmployee(Employee $employee)
     {

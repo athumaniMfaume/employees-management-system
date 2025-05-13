@@ -49,7 +49,12 @@
 
 
 
-                                              
+                         <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{route('mySalary')}}">
+                                <i class="mdi mdi-cash-multiple"></i> 
+                                  <span data-key="t-widgets">Salary</span>
+                            </a>
+                        </li>                                             
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{route('employees.profile')}}">
