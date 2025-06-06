@@ -9,11 +9,16 @@ use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\ComplainController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::fallback(function () {
     return view('404');
 });
+
+
 
 
  Route::get('/employee/salary/{id}/pdf', [SalaryController::class, 'generatePDF'])->name('employee.salary.pdf');
@@ -79,16 +84,16 @@ Route::delete('/admin/salaries/{id}', [SalaryController::class, 'destroy'])->nam
 
     Route::get('/admin/leave/{leave}/approve', [AdminController::class, 'approve_leave'])->name('leave.approve');
 
-    Route::put('/admin/leave/{leave}/approve_leave_post', [AdminController::class, 
+    Route::put('/admin/leave/{leave}/approve_leave_post', [AdminController::class,
         'approve_leave_post'])->name('approve_leave_post');
-    
+
 
     Route::get('/admin/employees/view', [AdminController::class, 'view_employees'])->name('employees.view');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/admin/employees/create', [AdminController::class, 'create_employees'])->name('employees.create');
     Route::post('/admin/employees/store', [AdminController::class, 'store_employee'])->name('employees.store');
-    
+
      Route::get('/admin/employees/{employee}/show', [AdminController::class, 'single_view_employees'])->name('single.employees');
 
     Route::get('/admin/employees/{employee}/edit', [AdminController::class, 'edit_employee'])->name('employees.edit');
@@ -102,8 +107,11 @@ Route::delete('/admin/salaries/{id}', [SalaryController::class, 'destroy'])->nam
     Route::get('/admin/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
     Route::put('/admin/departments/{department}/update', [DepartmentController::class, 'update'])->name('departments.update');
     Route::delete('/admin/departments/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
-  
+
 });
+
+
+
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -113,10 +121,15 @@ Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/login/post', [AuthController::class, 'loginPost'])->name('loginPost');
 
 
-    
+
     // Routes for authorized users to change their password
     Route::get('/change_password', [AuthController::class, 'change_password'])->name('change_password');
     Route::post('/change_password/post', [AuthController::class, 'change_password_post'])->name('change_password_post');
+
+    Route::get('/forgot-password', [AuthController::class, 'showLinkRequestForm'])->name('password.forgot');
+    Route::post('forgot-password/post', [AuthController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [AuthController::class, 'reset'])->name('password.update');
 
     // Route for logging out (authenticated users)
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -30,7 +30,8 @@ class StoreEmployeeRequest extends FormRequest
             'phone' => 'required|regex:/^\+255[0-9]{9}$/',
             'image' => 'required|mimes:jpg,jpeg,png,gif|max:10000',
             'dob' => 'required|date|before:' . now()->subYears(18)->toDateString(),
-            'salary' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'salary' => 'required|numeric|min:100000|regex:/^\d+(\.\d{1,2})?$/',
+
         ];
     }
 }

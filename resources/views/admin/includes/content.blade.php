@@ -10,18 +10,18 @@
                             <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                 <div class="flex-grow-1">
                                     <h4 class="fs-16 mb-1">Welcome,{{Auth::user()->name}}!</h4>
-                                    
+
                                 </div>
                                 <div class="mt-3 mt-lg-0">
                                     <form action="javascript:void(0);">
                                         <div class="row g-3 mb-0 align-items-center">
-                                           
+
                                             <!--end col-->
                                             <div class="col-auto">
                                                 <a href="{{route('employees.create')}}" class="btn btn-primary">Add Employee</a>
                                             </div>
                                             <!--end col-->
-                                         
+
                                             <!--end col-->
                                         </div>
                                         <!--end row-->
@@ -42,7 +42,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Employees</p>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
@@ -67,7 +67,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Departments</p>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
@@ -93,7 +93,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Complaints</p>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
@@ -118,7 +118,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Leave</p>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
@@ -135,6 +135,21 @@
                             </div><!-- end card -->
                         </div><!-- end col -->
                     </div> <!-- end row-->
+
+                    <!-- Add this below your existing dashboard rows -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>System Summary Chart</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="summaryChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
                 </div> <!-- end .h-100-->

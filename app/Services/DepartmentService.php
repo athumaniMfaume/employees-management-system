@@ -1,5 +1,5 @@
 <?php
-    
+
 namespace App\Services;
 
 use App\Models\Department;
@@ -8,7 +8,7 @@ class DepartmentService
 {
 	public function getAllDepartments()
     {
-        return Department::all();  
+        return Department::paginate(5);
     }
 
     public function createDepartment(array $data)

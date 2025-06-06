@@ -2,11 +2,11 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/material/auth-signup-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:03:47 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/material/auth-pass-reset-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:03:47 GMT -->
 <head>
 
     <meta charset="utf-8" />
-    <title> Employee Management System | Login </title>
+    <title>Reset Password | Velzon - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -37,7 +37,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card overflow-hidden m-0">
+                        <div class="card overflow-hidden">
                             <div class="row justify-content-center g-0">
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100">
@@ -61,78 +61,68 @@
                                                     </div>
                                                     <div class="carousel-inner text-center text-white-50 pb-5">
                                                         <div class="carousel-item active">
-                                                            <p class="fs-15 fst-italic">" This system makes employee management seamless and efficient. A game-changer for our HR team! "</p>
+                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" User-friendly interface and excellent features for tracking employee records. Highly recommended! "</p>
+                                                            <p class="fs-15 fst-italic">" The theme is really great with an amazing customer support."</p>
                                                         </div>
                                                         <div class="carousel-item">
-                                                            <p class="fs-15 fst-italic">" Managing employees, leave requests, and payroll has never been easier. A must-have for any company! "</p>
+                                                            <p class="fs-15 fst-italic">" Great! Clean code, clean design, easy for customization. Thanks very much! "</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- end carousel -->
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- end col -->
 
                                 <div class="col-lg-6">
                                     <div class="p-lg-5 p-4">
-                                        @if (Session::has('error'))
+                                           @if (Session::has('error'))
                                          <div class="alert alert-danger"> {{Session::get('error')}} </div>
                                         @endif
 
                                         @if (Session::has('success'))
                                           <div class="alert alert-success"> {{Session::get('success')}} </div>
                                         @endif
-                                        <div>
-                                            <h5 class="text-primary">Login Account</h5>
+                                        <h5 class="text-primary">Forgot Password?</h5>
+                                        <p class="text-muted">Reset password with velzon</p>
 
+                                        <div class="mt-2 text-center">
+                                            <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-xl">
+                                            </lord-icon>
                                         </div>
 
-                                        <div class="mt-4">
-                                            <form  action="{{route('loginPost')}}" method="POST">
+                                        <div class="alert border-0 alert-warning text-center mb-2 mx-2" role="alert">
+                                            Enter your email and instructions will be sent to you!
+                                        </div>
+                                        <div class="p-2">
+                                            <form action="{{route('password.email')}}" method="post">
                                                 @csrf
-
-                                                <div class="mb-3">
-                                                    <label for="useremail" class="form-label">Email </label>
-                                                    <input type="email" name="email" class="form-control"  placeholder="Enter email address" >
+                                                <div class="mb-4">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address">
                                                     @error('email')
                                                         <p class="text-danger">{{$message}}</p>
                                                     @enderror
                                                 </div>
 
-
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="password-input">Password</label>
-                                                    <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" name="password" class="form-control"  placeholder="Enter password" >
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                        @error('password')
-                                                        <p class="text-danger">{{$message}}</p>
-                                                    @enderror
-                                                    </div>
+                                                <div class="text-center mt-4">
+                                                    <button class="btn btn-success w-100" type="submit">Send Reset Link</button>
                                                 </div>
-
-
-
-
-                                                <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Login</button>
-                                                </div>
-
-                                           <div class="mt-5 text-center">
-                                            <p class="mb-0">Forgot Password? <a href="{{route('password.forgot')}}" class="fw-semibold text-primary text-decoration-underline"> Click here...</a> </p>
+                                            </form><!-- end form -->
                                         </div>
 
-
-                                            </form>
+                                        <div class="mt-5 text-center">
+                                            <p class="mb-0">Wait, I remember my password... <a href="{{route('login')}}" class="fw-semibold text-primary text-decoration-underline"> Click here </a> </p>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- end col -->
                             </div>
+                            <!-- end row -->
                         </div>
                         <!-- end card -->
                     </div>
@@ -146,7 +136,19 @@
         <!-- end auth page content -->
 
         <!-- footer -->
-         @include('admin.includes.footer')
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <p class="mb-0">&copy;
+                                <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <!-- end Footer -->
     </div>
     <!-- end auth-page-wrapper -->
@@ -158,13 +160,8 @@
     <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
     <script src="{{asset('assets/js/plugins.js')}}"></script>
-
-    <!-- validation init -->
-    <script src="{{asset('assets/js/pages/form-validation.init.js')}}"></script>
-    <!-- password create init -->
-    <script src="{{asset('assets/js/pages/passowrd-create.init.js')}}"></script>
 </body>
 
 
-<!-- Mirrored from themesbrand.com/velzon/html/material/auth-signup-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:03:47 GMT -->
+<!-- Mirrored from themesbrand.com/velzon/html/material/auth-pass-reset-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Aug 2024 20:03:47 GMT -->
 </html>

@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable; // Use this instead of Model
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Employee extends Authenticatable
+class Employee extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory, HasApiTokens, Notifiable;
 
 
     protected $fillable = [
@@ -28,19 +30,19 @@ class Employee extends Authenticatable
 }
 
     public function departments(){
-        
+
         return $this->belongsTo(Department::class,'department_id');
 
     }
 
     public function leaves(){
-        
+
         return $this->hasMany(Leave::class,'employee_id');
 
     }
 
     public function complains(){
-        
+
         return $this->hasMany(Complain::class,'employee_id');
 
     }

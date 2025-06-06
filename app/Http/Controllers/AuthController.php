@@ -3,14 +3,122 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employee;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 
 
 class AuthController extends Controller
 {
+
+    public function setPassword(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email|exists:employees,email',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput()
+            ->with('error', 'Please correct the errors below.');
+    }
+
+    $employee = Employee::where('email', $request->email)->first();
+
+    if (!$employee) {
+        return redirect()->back()->with('error', 'Employee not found.');
+    }
+
+    $employee->password = Hash::make($request->password);
+    $employee->save();
+
+    return redirect()->route('login')->with('success', 'Password set successfully. You can now log in.');
+}
+
+    public function showLinkRequestForm()
+    {
+        return view('auth.forgot-password');
+    }
+
+   public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $email = $request->email;
+
+        // Identify user type
+        if (User::where('email', $email)->exists()) {
+            $broker = 'users';
+        } elseif (Employee::where('email', $email)->exists()) {
+            $broker = 'employees';
+        } else {
+            return back()->withErrors(['email' => 'This email is not registered.']);
+        }
+
+        // Send reset link
+        $status = Password::broker($broker)->sendResetLink($request->only('email'));
+
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with('success', 'Reset link sent successfully.')
+            : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function showResetForm($token)
+    {
+        return view('auth.reset-password', ['token' => $token]);
+    }
+
+public function reset(Request $request)
+{
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|confirmed|min:6',
+    ]);
+
+    $email = $request->input('email');
+
+    // Check if email exists in users
+    if (User::where('email', $email)->exists()) {
+        $broker = 'users';
+        $modelClass = User::class;
+        $emailExistsRule = 'exists:users,email';
+    }
+    // Else check employees
+    elseif (Employee::where('email', $email)->exists()) {
+        $broker = 'employees';
+        $modelClass = Employee::class;
+        $emailExistsRule = 'exists:employees,email';
+    } else {
+        // Email does not exist in either table
+        return back()->withErrors(['email' => 'Email not found in our records.']);
+    }
+
+    // Re-validate email existence in the correct table
+    $request->validate([
+        'email' => ['required', 'email', $emailExistsRule],
+    ]);
+
+    $status = Password::broker($broker)->reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) use ($modelClass) {
+            $user->forceFill([
+                'password' => Hash::make($password),
+                'remember_token' => Str::random(60),
+            ])->save();
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('success', 'Password has been reset.')
+        : back()->withErrors(['email' => 'Reset failed.']);
+}
 
     public function change_password()
     {
@@ -70,7 +178,7 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success', 'You have been logged out.');
     }
-    
+
 
     public function register()
     {
@@ -84,7 +192,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
-            
+
         ]);
 
         $data = new User();

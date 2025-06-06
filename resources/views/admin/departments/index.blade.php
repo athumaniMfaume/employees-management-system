@@ -83,9 +83,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     @if($departments->isEmpty())
-                                      <center> <h1>No data available!</h1></center> 
+                                      <center> <h1>No data available!</h1></center>
 
                                       @else
 
@@ -95,32 +95,32 @@
                                                     <tr>
                                                         <th class="sort" data-sort="customer_name" > S/N </th>
                                                         <th class="sort" data-sort="customer_name">Name</th>
-                                                        
+
                                                         <th class="sort" data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
-                                                     
+
                                                     @foreach ($departments as $department)
-                                            
-                                        
+
+
                                                     <tr>
-                                                        <th>{{$loop->iteration}}</th>
+                                                        <th>{{$department->id}}</th>
                                                         <td class="customer_name" >{{$department->name}}</td>
-                                                        
+
                                                         <td>
                                                            <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-warning btn-icon waves-effect waves-light"><i class="ri-edit-bin-5-line"></i>Edit</a>
                                                            <form action="{{ route('departments.destroy', $department->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this emloyee?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            
+
                                                             <button type="submit" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-delete-bin-5-line"></i></button>                                            </form>
-            
+
                                                         </td>
                                                     </tr>
                                                     @endforeach
                                                      @endif
-                                                    
+
                                                 </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
@@ -128,20 +128,14 @@
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px">
                                                     </lord-icon>
                                                     <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                  
+
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-end">
                                             <div class="pagination-wrap hstack gap-2">
-                                                <a class="page-item pagination-prev disabled" href="javascript:void(0);">
-                                                    Previous
-                                                </a>
-                                                <ul class="pagination listjs-pagination mb-0"></ul>
-                                                <a class="page-item pagination-next" href="javascript:void(0);">
-                                                    Next
-                                                </a>
+                                                 {{$departments->links()}}
                                             </div>
                                         </div>
                                     </div>
