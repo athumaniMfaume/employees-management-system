@@ -168,7 +168,10 @@
 
                                <div class="col-xxl-3 col-md-6">
                     <label>Current image</label>
-                  <img height="70" width="120" src="/{{$employee->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$employee->image }}">
+                <img height="70" width="120" 
+     src="{{ asset($employee->image == NULL ? 'assets/images/users/user-dummy-img.jpg' : 'images/'.$employee->image) }}" 
+     alt="Employee Image">
+
                 </div>
                                 <!--end col-->
 

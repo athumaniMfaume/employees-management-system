@@ -110,7 +110,12 @@
                                         
                                                     <tr>
                                                         <th>{{$loop->iteration}}</th>
-                                                        <td><img height="70%" width="90%" src="/{{$data->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$data->image }}"></td>
+                                                        <td>
+    <img height="70" width="90" 
+         src="{{ asset($data->image == NULL ? 'assets/images/users/user-dummy-img.jpg' : 'images/'.$data->image) }}" 
+         alt="Employee Image">
+</td>
+
                                                           <td class="customer_name" >{{ $data->name}}</td>
                                                         <td class="customer_name" >{{ $data->gender ?? ' ' }}</td>
                                                         <td class="date">{{$data->departments->name}}</td>

@@ -12,14 +12,21 @@
                 <div class="container-fluid">
                     <div class="profile-foreground position-relative mx-n4 mt-n4">
                         <div class="profile-wid-bg">
-                            <img height="70" width="120" src="/{{$employee->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$employee->image }}" class="profile-wid-img" />
+                            <img height="70" width="120" 
+     src="{{ asset($employee->image == null ? 'assets/images/users/user-dummy-img.jpg' : 'images/' . $employee->image) }}" 
+     class="profile-wid-img" 
+     alt="employee-image" />
+
                         </div> 
                     </div>
                     <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
                         <div class="row g-4">
                             <div class="col-auto">
                                 <div class="avatar-lg">
-                                    <img src="/{{$employee->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.$employee->image }}"alt="user-img" class="img-thumbnail rounded-circle" />
+                                   <img src="{{ asset($employee->image == NULL ? 'assets/images/users/user-dummy-img.jpg' : 'images/'.$employee->image) }}" 
+     alt="user-img" 
+     class="img-thumbnail rounded-circle" />
+
                                 </div> -->
                             </div>
                             <!--end col-->

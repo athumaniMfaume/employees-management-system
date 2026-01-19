@@ -11,14 +11,20 @@
                 <div class="container-fluid">
                     <div class="profile-foreground position-relative mx-n4 mt-n4">
                         <div class="profile-wid-bg">
-                            <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="" class="profile-wid-img" />
+                            <img src="{{ asset(Auth::guard('employee')->user()->image == NULL ? 'assets/images/users/user-dummy-img.jpg' : 'images/'.Auth::guard('employee')->user()->image) }}" 
+     alt="Employee Profile" 
+     class="profile-wid-img" />
+
                         </div>
                     </div>
                     <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
                         <div class="row g-4">
                             <div class="col-auto">
                                 <div class="avatar-lg">
-                                    <img src="/{{Auth::guard('employee')->user()->image == NULL? 'assets/images/users/user-dummy-img.jpg': 'images/'.Auth::guard('employee')->user()->image }}" alt="user-img" class="img-thumbnail rounded-circle" />
+                                    <img src="{{ asset(Auth::guard('employee')->user()->image == NULL ? 'assets/images/users/user-dummy-img.jpg' : 'images/'.Auth::guard('employee')->user()->image) }}" 
+     alt="user-img" 
+     class="img-thumbnail rounded-circle" />
+
                                 </div>
                             </div>
                             <!--end col-->
