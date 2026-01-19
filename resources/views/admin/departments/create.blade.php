@@ -52,7 +52,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter Full Name">
+                                        <input type="text" name="name" class="form-control @error('name')
+                                           is-invalid
+                                        @enderror " placeholder="Enter Full Name">
                                         
                                     </div>
                                     @error('name')

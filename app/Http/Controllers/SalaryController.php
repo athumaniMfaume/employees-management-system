@@ -62,12 +62,12 @@ public function generatePDF($id)
 
         public function store(Request $request)
     {
-        $request->validate([
-            'employee_id' => 'required|exists:employees,id',
-            'basic_salary' => 'required|numeric',
-            'allowance' => 'nullable|numeric',
-            'deductions' => 'nullable|numeric'
-        ]);
+$request->validate([
+    'employee_id' => 'required|exists:users,id',
+    'basic_salary' => 'required|numeric|max:999999999', // Zuia namba zisizozidi Bilioni 1
+    'allowance' => 'nullable|numeric|max:99999999',
+    'deductions' => 'nullable|numeric|max:99999999'
+]);
 
         $basic = $request->basic_salary;
         $allowance = $request->allowance ?? 0;
@@ -101,12 +101,12 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    $request->validate([
-        'employee_id' => 'required|exists:users,id',
-        'basic_salary' => 'required|numeric',
-        'allowance' => 'nullable|numeric',
-        'deductions' => 'nullable|numeric'
-    ]);
+$request->validate([
+    'employee_id' => 'required|exists:users,id',
+    'basic_salary' => 'required|numeric|max:999999999', // Zuia namba zisizozidi Bilioni 1
+    'allowance' => 'nullable|numeric|max:99999999',
+    'deductions' => 'nullable|numeric|max:99999999'
+]);
 
     $salary = Salary::findOrFail($id);
 

@@ -52,7 +52,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter Full Name">
+                                        <input type="text" value="{{old('name') }}" name="name" class="form-control @error('name')
+                                           is-invalid
+                                        @enderror" placeholder="Enter Full Name">
                                         
                                     </div>
                                     @error('name')
@@ -63,7 +65,9 @@
                                   <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Gender</label>
-                                        <select name="gender" class="form-control" >
+                                        <select name="gender"  class="form-control @error('gender')
+                                           is-invalid
+                                        @enderror" >
                                             <option value="" disabled selected> Select Gender</option>
                                             
                                                         <option value="male">Male</option>
@@ -81,7 +85,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="basiInput" class="form-label">Department</label>
-                                        <select name="department_id" class="form-control" >
+                                        <select name="department_id" class="form-control  @error('department_id')
+                                           is-invalid
+                                        @enderror" >
                                             <option value="" disabled selected> Select Department</option>
                                             @foreach ($deps as $dep)
                                                 <option value="{{$dep->id}}">{{$dep->name}}</option>
@@ -98,7 +104,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="labelInput" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                                        <input type="email" value="{{old('email') }}" name="email" class="form-control @error('email')
+                                       is-invalid
+                                 @enderror" placeholder="Enter Email">
                                        
                                     </div>
                                     @error('email')
@@ -109,7 +117,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="placeholderInput" class="form-label">Phone</label>
-                                        <input type="text" name="phone" class="form-control"  placeholder="Enter Phone Number start with +255">
+                                        <input type="text" value="{{old('phone') }}"  name="phone" class="form-control @error('phone')
+                                    is-invalid
+                                 @enderror"  placeholder="Enter Phone Number start with +255">
                                     </div>
                                     @error('phone')
                                     <p class="text-danger">{{$message}}</p>
@@ -119,7 +129,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="valueInput" class="form-label">Date of birth</label>
-                                        <input type="date" name="dob" class="form-control" >
+                                        <input type="date" value="{{old('dob') }}" name="dob"   class="form-control @error('dob')
+                                    is-invalid
+                                 @enderror" >
                                     </div>
                                     @error('dob')
                                     <p class="text-danger">{{$message}}</p>
@@ -129,7 +141,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="readonlyPlaintext" class="form-label">Position</label>
-                                        <input type="text" name="position" class="form-control" >
+                                        <input type="text" value="{{old('position') }}"  name="position" class="form-control @error('position')
+                                    is-invalid
+                                 @enderror" >
                                     </div>
                                     @error('position')
                                     <p class="text-danger">{{$message}}</p>
@@ -139,7 +153,8 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="readonlyInput" class="form-label">Salary</label>
-                                        <input type="text" name="salary" class="form-control"  >
+                                        <input type="text" value="{{old('salary') }}" name="salary" class="form-control @error('salary')
+                                    is-invalid                                 @enderror"  >
                                     </div>
                                     @error('salary')
                                     <p class="text-danger">{{$message}}</p>
@@ -150,7 +165,9 @@
                                 <div class="col-xxl-3 col-md-6">
                                     <div>
                                         <label for="readonlyInput" class="form-label">Image</label>
-                                        <input type="file" name="image" class="form-control"  >
+                                        <input type="file" name="image" class="form-control @error('image')
+                                    is-invalid
+                                 @enderror"  >
                                     </div>
                                     @error('image')
                                     <p class="text-danger">{{$message}}</p>

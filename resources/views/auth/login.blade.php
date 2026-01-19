@@ -97,24 +97,44 @@
                                                 @csrf
 
                                                 <div class="mb-3">
-                                                    <label for="useremail" class="form-label">Email </label>
-                                                    <input type="email" name="email" class="form-control"  placeholder="Enter email address" >
-                                                    @error('email')
-                                                        <p class="text-danger">{{$message}}</p>
-                                                    @enderror
-                                                </div>
+    <label for="email" class="form-label">Email Address</label>
+    <input type="email" 
+           name="email" 
+           id="email"
+           class="form-control @error('email') is-invalid @enderror" 
+           value="{{ old('email') }}"  
+           placeholder="e.g. athumani@example.com">
+    
+    @error('email')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
 
 
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="password-input">Password</label>
-                                                    <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" name="password" class="form-control"  placeholder="Enter password" >
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                        @error('password')
-                                                        <p class="text-danger">{{$message}}</p>
-                                                    @enderror
-                                                    </div>
-                                                </div>
+    <label class="form-label" for="password-input">Password</label>
+    <div class="position-relative auth-pass-inputgroup">
+        <input type="password" 
+               name="password" 
+               id="password-input" 
+               class="form-control pe-5 @error('password') is-invalid @enderror" 
+               placeholder="Enter password">
+        
+        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" 
+                type="button" 
+                id="password-addon">
+            <i class="ri-eye-fill align-middle"></i>
+        </button>
+
+        @error('password')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+</div>
 
 
 
