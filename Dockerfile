@@ -54,6 +54,9 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 80
 
 # ----------------------------
-# Set entrypoint
+# Entrypoint
 # ----------------------------
 ENTRYPOINT ["docker-entrypoint.sh"]
+
+# CMD is optional since entrypoint starts Apache
+CMD ["apache2-foreground"]
