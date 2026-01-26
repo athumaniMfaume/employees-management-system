@@ -13,10 +13,21 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 
 Route::fallback(function () {
     return view('404');
+});
+
+Route::get('/check-log', function () {
+    $logFile = storage_path('logs/laravel.log');
+    if (File::exists($logFile)) {
+        $lines = file($logFile);
+        $lastLines = array_slice($lines, -20); // show last 20 lines
+        return "<pre>" . implode("", $lastLines) . "</pre>";
+    }
+    return "Log file not found";
 });
 
 Route::get('/run-migrations', function () {
