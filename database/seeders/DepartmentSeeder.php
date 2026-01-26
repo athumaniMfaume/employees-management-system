@@ -7,9 +7,6 @@ use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $departments = [
@@ -25,9 +22,10 @@ class DepartmentSeeder extends Seeder
         ];
 
         foreach ($departments as $department) {
-            // updateOrCreate inazuia duplicate error
-            Department::create($department);
-            
+            Department::updateOrCreate(
+                ['name' => $department['name']],
+                []
+            );
         }
     }
 }

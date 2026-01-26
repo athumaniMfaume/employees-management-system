@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Employee;
 use App\Models\Department;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([ DepartmentSeeder::class,UserSeeder::class,]);
+        $this->call([
+            UserSeeder::class, EmployeeSeeder::class, DepartmentSeeder::class,
+        ]);
     }
 }
