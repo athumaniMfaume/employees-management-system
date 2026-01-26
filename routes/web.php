@@ -19,6 +19,16 @@ Route::fallback(function () {
     return view('404');
 });
 
+Route::get('/run-migrations', function () {
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        Artisan::call('db:seed', ['--force' => true]);
+        return "Migrations and seeders ran successfully!";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
+
 Route::get('/test-db', function () {
     try {
         DB::connection()->getPdo();
