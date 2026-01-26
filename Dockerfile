@@ -22,10 +22,19 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
+# --- ADD THESE LINES START ---
+# Create the directory and set permissions for the web server user (www-data)
+RUN mkdir -p /var/www/html/public/images \
+    && chown -R www-data:www-data /var/www/html/public/images \
+    && chmod -R 775 /var/www/html/public/images \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# --- ADD THESE LINES END ---
+
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 80
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["apache2-foreground"]
+CMD ["apache2-forward-logs"] # Standard for some PHP images, or stick to "apache2-foreground"
+
 

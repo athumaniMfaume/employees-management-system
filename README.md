@@ -138,7 +138,8 @@ php artisan serve
 
 🔐 Default Login Credentials
 Role	Email	Password
-Admin	admin@gmail.com	password 123
+Admin	athumanimfaume1995@gmail.com	password 123456789
+User   athumanimfaume1995@gmail.com    password 123456
 
 8. Usage Guide
 
