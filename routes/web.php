@@ -12,10 +12,20 @@ use App\Http\Controllers\DepartmentController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 Route::fallback(function () {
     return view('404');
+});
+
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return "Database connection is working!";
+    } catch (\Exception $e) {
+        return "Database connection failed: " . $e->getMessage();
+    }
 });
 
 
