@@ -25,3 +25,4 @@ php /var/www/html/artisan view:cache
 
 echo "Starting Apache..."
 exec apache2-foreground
+
