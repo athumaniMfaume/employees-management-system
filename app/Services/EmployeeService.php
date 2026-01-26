@@ -9,63 +9,73 @@ use App\Mail\EmployeeCredentialsNotification;
 
 class EmployeeService
 {
-    public function createEmployee($data)
-    {
-        $password = 123; // Default password
-
-        // Handle image upload
-        if (isset($data['image'])) {
-            $image = $data['image'];
-
-            if ($image->isValid()) {
-                $imagename = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images'), $imagename);
-                $data['image'] = $imagename;
-            }
-        }
-
-        // Hash the password
-        $data['password'] = Hash::make($password);
-
-        // Create employee
-        $employee = Employee::create($data);
-
-        // Send email
-        if ($employee) {
-            Mail::to($employee->email)->send(new EmployeeCredentialsNotification($employee->email, $password));
-        }
-
-        return $employee;
-    }
-
-public function updateEmployee($data, Employee $employee)
+public function createEmployee($data)
 {
-    // Handle image update
-    if (isset($data['image'])) {
-        $image = $data['image'];
+    $password = "12345678"; // Use a stronger default string
 
-        if ($image->isValid()) {
-            // Delete old image
-            if ($employee->image && file_exists(public_path('images/' . $employee->image))) {
-                unlink(public_path('images/' . $employee->image));
-            }
-
-            // Save new image
+    try {
+        if (isset($data['image']) && $data['image']->isValid()) {
+            $image = $data['image'];
             $imagename = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imagename);
             $data['image'] = $imagename;
-        } else {
-            return 'Invalid image file.';
         }
-    }
 
-    if ($employee->update($data)) {
-        // ✅ Return updated model instance
-        return $employee->fresh(); // Refresh and return updated data
-    }
+        $data['password'] = Hash::make($password);
+        $employee = Employee::create($data);
 
-    return 'Failed to update employee.';
+        // Wrap mail in try-catch so if mail fails, the employee is still created
+        try {
+            Mail::to($employee->email)->send(new EmployeeCredentialsNotification($employee->email, $password));
+        } catch (\Exception $e) {
+            \Log::error("Mail failed: " . $e->getMessage());
+        }
+
+        return $employee;
+    } catch (\Exception $e) {
+        \Log::error("Employee creation failed: " . $e->getMessage());
+        return null; 
+    }
 }
+
+
+public function updateEmployee($data, Employee $employee)
+{
+    try {
+        // Handle image update
+        if (isset($data['image']) && $data['image']->isValid()) {
+            $image = $data['image'];
+
+            // DELETE OLD IMAGE SAFELY
+            // Use file_exists to prevent "file not found" crash on Render
+            if ($employee->image) {
+                $oldPath = public_path('images/' . $employee->image);
+                if (file_exists($oldPath)) {
+                    @unlink($oldPath); // @ suppresses warnings if deletion fails
+                }
+            }
+
+            // SAVE NEW IMAGE
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imagename);
+            $data['image'] = $imagename;
+        }
+
+        // PERFORM UPDATE
+        $employee->update($data);
+        
+        // Always return the updated model
+        return $employee->fresh();
+
+    } catch (\Exception $e) {
+        // Log the error so you can see it in Render's dashboard logs
+        \Log::error("Employee Update Failed: " . $e->getMessage());
+        
+        // Throwing the error allows your Controller to catch it and show a message
+        throw $e; 
+    }
+}
+
 
 
     public function deleteEmployee(Employee $employee)
