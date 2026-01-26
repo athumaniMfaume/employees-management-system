@@ -17,14 +17,14 @@ class UserSeeder extends Seeder
         User::insert([
             [
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => hash::make(123), 
+            'email' => 'athumanimfaume1995@gmail.com',
+            'password' => hash::make(123456789), 
         ],
 
                     [
             'name' => 'Administrator',
-            'email' => 'administrator@gmail.com',
-            'password' => hash::make(123), 
+            'email' => 'athumanimfaume1995@gmail.com',
+            'password' => hash::make(123456), 
         ],
 
         ]);
