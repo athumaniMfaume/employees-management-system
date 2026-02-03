@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'brevo'),
+    'default' => env('MAIL_MAILER', 'log'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,14 +46,14 @@ return [
     'timeout' => null,
     'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
 ],
-'brevo' => [
-    'transport' => 'symfony',
-    'scheme' => 'https',
-    'host' => 'api.brevo.com',
-    'port' => 443,
-    'username' => 'apikey',
-    'password' => env('BREVO_API_KEY'),
-],
+// 'brevo' => [
+//     'transport' => 'symfony',
+//     'scheme' => 'https',
+//     'host' => 'api.brevo.com',
+//     'port' => 443,
+//     'username' => 'apikey',
+//     'password' => env('BREVO_API_KEY'),
+// ],
 
 
 
