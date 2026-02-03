@@ -20,6 +20,15 @@ Route::fallback(function () {
     return view('404');
 });
 
+Route::get('/mail-test', function () {
+    \Mail::raw('Brevo API working!', function ($m) {
+        $m->to('athumanimfaume1995@gmail.com')->subject('API Mail Test');
+    });
+
+    return 'Sent';
+});
+
+
 Route::get('/check-log', function () {
     $logFile = storage_path('logs/laravel.log');
     if (File::exists($logFile)) {
